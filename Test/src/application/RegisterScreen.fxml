@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RegisterController">
    <top>
             <AnchorPane prefHeight="111.0" prefWidth="1280.0" style="-fx-background-color: springgreen;" BorderPane.alignment="CENTER">
          <children>
@@ -28,7 +28,6 @@
                <font>
                   <Font name="Montserrat Regular" size="22.0" />
                </font></PasswordField>
-            <Button id="loginbutton" layoutX="888.0" layoutY="313.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="88.0" stylesheets="@css/login.css" text="Login" textAlignment="RIGHT" wrapText="true" />
             <Button id="loginImage" layoutX="951.0" layoutY="205.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="128.0" rotate="90.0" stylesheets="@css/login.css" />
             <TextField layoutX="650.0" layoutY="188.0" prefHeight="50.0" prefWidth="330.0" promptText="Cognoms">
                <font>
@@ -45,7 +44,7 @@
                   <Font name="Montserrat Regular" size="22.0" />
                </font>
             </TextField>
-            <Button id="loginImage" layoutX="200.0" layoutY="205.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="128.0" rotate="-90.0" stylesheets="@css/login.css" />
+            <Button id="loginImage" fx:id="goLogin" layoutX="200.0" layoutY="205.0" mnemonicParsing="false" onAction="#toLogin" prefHeight="71.0" prefWidth="128.0" rotate="-90.0" stylesheets="@css/login.css" />
          </children>
       </AnchorPane>
    </center>

@@ -55,12 +55,17 @@ public class Contoller {
 	public void initialize() throws URISyntaxException, SQLException {
 
 		//Home button
+		//Import image
 		Image homeBtnImage = new Image(getClass().getResource("img/icon.png").toURI().toString());
-	    ImageView homeBtnImageView = new ImageView(homeBtnImage);
+	    //Create ImageView To display image
+		ImageView homeBtnImageView = new ImageView(homeBtnImage);
+		//Set size
 	    homeBtnImageView.setFitHeight(40);	    
 	    homeBtnImageView.setPreserveRatio(true);
+	    //Add image to button
 	    homeButton.setGraphic(homeBtnImageView);
 	    //Profile button
+	    //Remove text from profile button
 	    profileButton.setText("");
 	    
 	    //Filters
@@ -69,7 +74,6 @@ public class Contoller {
 	    
 
 	    //Main Page HBox
-
 	    String test [][] = queryTest();
 
 	    mainPageHBox.setSpacing(20); 

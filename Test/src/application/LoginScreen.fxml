@@ -29,8 +29,9 @@
                   <Font name="Montserrat Regular" size="22.0" />
                </font></PasswordField>
             <Button id="loginbutton" fx:id="noLogin" layoutX="477.0" layoutY="311.0" mnemonicParsing="false" onAction="#toMainPage" prefHeight="51.0" prefWidth="141.0" stylesheets="@css/login.css" text="Continuar sensse compte " textOverrun="CLIP" wrapText="true" />
-            <Button id="loginbutton" layoutX="709.0" layoutY="311.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="98.0" stylesheets="@css/login.css" text="Registrar-se   " textAlignment="RIGHT" wrapText="true" />
+            <Button id="loginbutton" fx:id="goRegister" layoutX="709.0" layoutY="311.0" mnemonicParsing="false" onAction="#toRegisterPage" prefHeight="51.0" prefWidth="98.0" stylesheets="@css/login.css" text="Registrar-se   " textAlignment="RIGHT" wrapText="true" />
             <Button id="loginImage" layoutX="789.0" layoutY="212.0" mnemonicParsing="false" onAction="#checkUser" prefHeight="71.0" prefWidth="128.0" rotate="90.0" stylesheets="@css/login.css" />
+            <Label id="logintext" fx:id="incorrectLogin" layoutX="481.0" layoutY="362.0" stylesheets="@css/login.css" textFill="RED" />
          </children>
       </AnchorPane>
    </center>

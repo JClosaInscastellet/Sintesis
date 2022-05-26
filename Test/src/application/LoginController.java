@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -21,8 +22,10 @@ import javafx.stage.Stage;
 public class LoginController {
 
 	@FXML Button noLogin;
+	@FXML Button goRegister;
 	@FXML TextField user;
 	@FXML PasswordField password;
+	@FXML Label incorrectLogin;
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
@@ -47,6 +50,7 @@ public class LoginController {
 			e.printStackTrace();
 
 		}
+		
 		Statement myStatement = myConnection.createStatement();
 		ResultSet userPassword = myStatement.executeQuery("SELECT Mail,Password FROM HomeIn.User");
 		
@@ -63,7 +67,10 @@ public class LoginController {
 		if(canLogin==true) {
 			loged = true;
 			toMainPage(event);
+		}else {
+			incorrectLogin.setText("Incorrect Mail/Password!");
 		}
+		
 		System.out.println("Clicked Login Button");
 	}
 
@@ -74,6 +81,13 @@ public class LoginController {
 	public void toMainPage(ActionEvent event) throws IOException {
 		Contoller.setHasLogged(loged);
 		root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	public void toRegisterPage(ActionEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("RegisterScreen.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
