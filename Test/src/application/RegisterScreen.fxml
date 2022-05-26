@@ -20,31 +20,32 @@
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Label id="logintext" layoutX="553.0" layoutY="130.0" stylesheets="@css/login.css" text="Registrarse" />
-            <TextField layoutX="297.0" layoutY="188.0" prefHeight="50.0" prefWidth="330.0" promptText="Nom">
+            <TextField fx:id="nameTField" layoutX="297.0" layoutY="188.0" prefHeight="50.0" prefWidth="330.0" promptText="Nom">
                <font>
                   <Font name="Montserrat Regular" size="22.0" />
                </font></TextField>
-            <PasswordField layoutX="475.0" layoutY="330.0" prefHeight="50.0" prefWidth="330.0" promptText="Password" stylesheets="@css/login.css">
+            <PasswordField fx:id="passwordPField" layoutX="475.0" layoutY="330.0" prefHeight="50.0" prefWidth="330.0" promptText="Password" stylesheets="@css/login.css">
                <font>
                   <Font name="Montserrat Regular" size="22.0" />
                </font></PasswordField>
-            <Button id="loginImage" layoutX="951.0" layoutY="205.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="128.0" rotate="90.0" stylesheets="@css/login.css" />
-            <TextField layoutX="650.0" layoutY="188.0" prefHeight="50.0" prefWidth="330.0" promptText="Cognoms">
+            <Button id="loginImage" fx:id="checkRegister" layoutX="951.0" layoutY="205.0" mnemonicParsing="false" onAction="#checkAccount" prefHeight="71.0" prefWidth="128.0" rotate="90.0" stylesheets="@css/login.css" />
+            <TextField fx:id="surnameTField" layoutX="650.0" layoutY="188.0" prefHeight="50.0" prefWidth="330.0" promptText="Cognoms">
                <font>
                   <Font name="Montserrat Regular" size="22.0" />
                </font>
             </TextField>
-            <TextField layoutX="297.0" layoutY="260.0" prefHeight="50.0" prefWidth="330.0" promptText="Ciutat">
+            <TextField fx:id="cityTField" layoutX="297.0" layoutY="260.0" prefHeight="50.0" prefWidth="330.0" promptText="Ciutat">
                <font>
                   <Font name="Montserrat Regular" size="22.0" />
                </font>
             </TextField>
-            <TextField layoutX="650.0" layoutY="260.0" prefHeight="50.0" prefWidth="330.0" promptText="Correu Electronic">
+            <TextField fx:id="mailTField" layoutX="650.0" layoutY="260.0" prefHeight="50.0" prefWidth="330.0" promptText="Correu Electronic">
                <font>
                   <Font name="Montserrat Regular" size="22.0" />
                </font>
             </TextField>
             <Button id="loginImage" fx:id="goLogin" layoutX="200.0" layoutY="205.0" mnemonicParsing="false" onAction="#toLogin" prefHeight="71.0" prefWidth="128.0" rotate="-90.0" stylesheets="@css/login.css" />
+            <Label id="logintext" fx:id="errorUserExists" layoutX="516.0" layoutY="392.0" stylesheets="@css/login.css" textFill="RED" />
          </children>
       </AnchorPane>
    </center>
