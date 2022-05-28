@@ -32,6 +32,7 @@ public class LoginController {
 	private boolean loged = false;
 	private String userStr;
 	private String passStr;
+	private int uidInt;
 	
 
 	
@@ -41,16 +42,17 @@ public class LoginController {
 
 	public void checkUser(ActionEvent event) throws SQLException, IOException {
 		boolean canLogin = false;
+		System.out.println("EEEE");
 		Connection myConnection=null;
 		try {
-			myConnection = DriverManager.getConnection("jdbc:mysql://192.168.1.99:3306","judit","1234");
+			myConnection = DriverManager.getConnection("jdbc:mysql://92.178.96.124:3306","judit","1234");
 		} catch (SQLException e) {
 			myConnection = DriverManager.getConnection("jdbc:mysql://92.178.96.124:3306","judit","1234");
 			System.out.println("ee");
 			e.printStackTrace();
 
 		}
-		
+		System.out.println("DB conected");
 		Statement myStatement = myConnection.createStatement();
 		ResultSet userPassword = myStatement.executeQuery("SELECT Mail,Password FROM HomeIn.User");
 		
@@ -63,13 +65,22 @@ public class LoginController {
 				canLogin = true;
 				System.out.println("Eureca");
 			}
+
 		}
+
+		ResultSet uid = myStatement.executeQuery("SELECT UserId From HomeIn.User WHERE Mail LIKE '"+userStr+"'");
+		while(uid.next()) {
+			uidInt = Integer.parseInt(uid.getString(1));
+			System.out.println(uidInt);
+		}
+		
 		if(canLogin==true) {
 			loged = true;
 			toMainPage(event);
 		}else {
 			incorrectLogin.setText("Incorrect Mail/Password!");
 		}
+		
 		
 		System.out.println("Clicked Login Button");
 	}
@@ -80,6 +91,9 @@ public class LoginController {
 	//Switch to main page
 	public void toMainPage(ActionEvent event) throws IOException {
 		Contoller.setHasLogged(loged);
+		if(loged) {
+			Contoller.setUID(uidInt);
+		}
 		root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);

@@ -17,14 +17,10 @@ public class Main extends Application {
 			//Set not resizable
 			primaryStage.setResizable(false);
 			//Load Fxml's, for test purposes
-			Parent homeScreen = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
 			Parent loginScreen = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
-			Parent registerScreen = FXMLLoader.load(getClass().getResource("RegisterScreen.fxml"));
 
 			//Create Scenes
-			Scene mainPageScene = new Scene(homeScreen,1280,720);
 			Scene loginScreenScene = new Scene(loginScreen,1280,720);
-			Scene registerScreenScene = new Scene(registerScreen,1280,720);
 
 			
 			
@@ -40,7 +36,6 @@ public class Main extends Application {
 	
 	public static void main(String[] args)  {
 		launch(args);
-
 
 		
 	}

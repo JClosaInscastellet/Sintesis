@@ -5,14 +5,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.io.IOException;
 import java.net.URISyntaxException;
 
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -29,27 +34,34 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class Contoller {
-	
+
 	//Set elements to use from fxml
 	//Buttons
 	@FXML private Button homeButton = new Button();
 	@FXML private Button profileButton = new Button();
+
 	@FXML MenuButton testFilters = new MenuButton();
-	
+
 	//Panes
 	@FXML BorderPane mainPagePane = new BorderPane();
 	@FXML HBox mainPageHBox;
 	@FXML ScrollPane mainPageSPane;
-	            
+
 	//Other vars
 	private int pos = 0;
-    private final int minPos = 0;
-    private final int maxPos = 100;
-    //To check if the user has logged
-    private static boolean hasLogged;
-    
+	private final int minPos = 0;
+	private final int maxPos = 100;
+	//To check if the user has logged
+	private static boolean hasLogged;
+	private static int uid;
+
+	//TO siwtch scene
+	private Stage stage;
+	private Scene scene;
+	private Parent root;
 
 	//Init method
 	public void initialize() throws URISyntaxException, SQLException {
@@ -57,83 +69,96 @@ public class Contoller {
 		//Home button
 		//Import image
 		Image homeBtnImage = new Image(getClass().getResource("img/icon.png").toURI().toString());
-	    //Create ImageView To display image
+		//Create ImageView To display image
 		ImageView homeBtnImageView = new ImageView(homeBtnImage);
 		//Set size
-	    homeBtnImageView.setFitHeight(40);	    
-	    homeBtnImageView.setPreserveRatio(true);
-	    //Add image to button
-	    homeButton.setGraphic(homeBtnImageView);
-	    //Profile button
-	    //Remove text from profile button
-	    profileButton.setText("");
-	    
-	    //Filters
-	    //multiple
-	    testFilters.setText("Various options");
-	    
+		homeBtnImageView.setFitHeight(40);	    
+		homeBtnImageView.setPreserveRatio(true);
+		//Add image to button
+		homeButton.setGraphic(homeBtnImageView);
+		//Profile button
+		//Remove text from profile button
+		profileButton.setText("");
 
-	    //Main Page HBox
-	    String test [][] = queryTest();
+		//Filters
+		//multiple
+		testFilters.setText("Various options");
 
-	    mainPageHBox.setSpacing(20); 
-	    
-	    mainPageHBox.setOnScroll(new EventHandler<ScrollEvent>() {
-            @Override
-            public void handle(ScrollEvent event) {
-            	mainPageSPane.setHvalue(mainPageSPane.getHvalue() - event.getDeltaY() / mainPageSPane.getWidth() * 3 );
-            }
-        });
-	    for(int i = 0; i < test[0].length; i++) {
-	    	mainPageHBox.getChildren().add(mainPageResults(i));
-	    	System.out.println("EEE");
-	    }
+
+		//Main Page HBox
+		System.out.println("Test Query");
+		String test [][] = queryTest();
+
+		mainPageHBox.setSpacing(20); 
+
+		mainPageHBox.setOnScroll(new EventHandler<ScrollEvent>() {
+			@Override
+			public void handle(ScrollEvent event) {
+				mainPageSPane.setHvalue(mainPageSPane.getHvalue() - event.getDeltaY() / mainPageSPane.getWidth() * 3 );
+			}
+		});
+		for(int i = 0; i < test[0].length; i++) {
+			mainPageHBox.getChildren().add(mainPageResults(i));
+			System.out.println("EEE");
+		}
 	}
 	public VBox mainPageResults(int i) throws SQLException, URISyntaxException{
 		String test [][] = queryTest();
 		VBox newVBox = new VBox();
+
+
 		Image homeBtnImage = new Image(getClass().getResource("img/icon.png").toURI().toString());
-	    ImageView homeBtnImageView = new ImageView(homeBtnImage);
+		ImageView homeBtnImageView = new ImageView(homeBtnImage);
 		newVBox.getChildren().add(homeBtnImageView);
-		newVBox.getChildren().add(new Label(test[0][i] + " \n " + test[1][i] ));
+		newVBox.getChildren().add(new Label(test[0][i] + "	" + test[1][i] ));
 		newVBox.setAlignment(Pos.CENTER);
 		return newVBox;
 	}
-    
+
 	public void test(ActionEvent E) {	
 		System.out.println("e");
 	}
 	public String[][] queryTest() throws SQLException {
 		Connection myConnection=null;
 		try {
-			 myConnection = DriverManager.getConnection("jdbc:mysql://192.168.1.99:3306","test","1234");
+			System.out.println("ControllerDB");
+			myConnection = DriverManager.getConnection("jdbc:mysql://92.178.96.124:3306","test","1234");
 		} catch (SQLException e) {
 			myConnection = DriverManager.getConnection("jdbc:mysql://92.178.96.124:3306","test","1234");
 			System.out.println("ee");
 			e.printStackTrace();
-			
+
 		}
 		Statement myStatement = myConnection.createStatement();
+
+		ResultSet myResSet = myStatement.executeQuery("SELECT Price,City,PropertyId FROM HomeIn.Property");
 		
-		ResultSet myResSet = myStatement.executeQuery("SELECT * FROM test.prova");
-		
-		
-		
-		ArrayList<String> ids = new ArrayList<String>();
-		ArrayList<String> names = new ArrayList<String>();
+
+
+		ArrayList<String> priceAR = new ArrayList<String>();
+		ArrayList<String> cityAR= new ArrayList<String>();
+		ArrayList<String> propertysAR= new ArrayList<String>();
 		while(myResSet.next() ) {
-			ids.add(myResSet.getString(1));
-			names.add(myResSet.getString(2));
+			priceAR.add(myResSet.getString(1));
+			cityAR.add(myResSet.getString(2));
+			propertysAR.add(myResSet.getString(2));
 		}
-		int length = ids.size();
-		if(length < 10) length = 10;
-		String toReturn[][] = new String [2][length];
-		toReturn[0] = ids.toArray(new String[length]);
-		toReturn[1] = names.toArray(new String[length]);
+
+		int length = priceAR.size();
+		if(length < 5) length = 5;
+		String toReturn[][] = new String [3][length];
+		toReturn[0] = priceAR.toArray(new String[length]);
+		toReturn[1] = cityAR.toArray(new String[length]);
+		toReturn[2] = propertysAR.toArray(new String[length]);
+		
+		System.out.println("SELECT ImageLink FROM ImageList Group By PropertyId");
+		ResultSet myResSet2 = myStatement.executeQuery("SELECT ImageLink FROM HomeIn.ImageList Group By PropertyId");
+		
+		
 		return toReturn;
-	
+
 	}
-	
+
 	//Setters/Getters
 	public static boolean isHasLogged() {
 		return hasLogged;
@@ -141,6 +166,24 @@ public class Contoller {
 	public static void setHasLogged(boolean hasLogged) {
 		Contoller.hasLogged = hasLogged;
 	}
-	
-	
+	public static void setUID(int uid) {
+		Contoller.uid = uid;
+	}
+	public static int getUID() {
+		return uid;
+	}
+
+	public void toProfile(ActionEvent event) throws IOException {
+		if(isHasLogged()) {
+			root = FXMLLoader.load(getClass().getResource("ProfilePage.fxml"));
+		}else {
+			root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
+		}
+
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+
 }
