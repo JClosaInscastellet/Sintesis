@@ -50,7 +50,7 @@ public class ProfileController {
 		System.out.println("SELECT ProfileImage FROM HomeIn.User WHERE UserId = "+Contoller.getUID());
 		while(customImageRS.next()) {
 			if(customImageRS.getString(1) == null) {
-				Image pimage = new Image("http://92.178.96.124/ftpuser/placeholder.jpg");
+				Image pimage = new Image("http://92.178.96.124/ftpuser/avatar.png");
 				customProfileImg.setImage(pimage);
 			}else {
 				Image pimage = new Image(customImageRS.getString(1));
