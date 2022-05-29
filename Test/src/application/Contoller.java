@@ -86,7 +86,7 @@ public class Contoller {
 
 		//Home button
 		//Import image
-		Image homeBtnImage = new Image(getClass().getResource("img/icon.png").toURI().toString());
+		Image homeBtnImage = new Image(getClass().getResource("img/homein.png").toURI().toString());
 		//Create ImageView To display image
 		ImageView homeBtnImageView = new ImageView(homeBtnImage);
 		//Set size
