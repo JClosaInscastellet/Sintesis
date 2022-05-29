@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -62,6 +63,18 @@ public class Contoller {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	//Filters
+	private static boolean rental;
+	private static boolean parking;
+	private static boolean elevator;
+	@FXML MenuButton provincesBtn;
+	@FXML MenuButton citysBtn;
+	private static String province;
+	private static String city;
+	private static int rooms;
+	private static int bathRooms;
+	private static int maxPrice;
+
 
 	//Init method
 	public void initialize() throws URISyntaxException, SQLException {
@@ -80,11 +93,6 @@ public class Contoller {
 		//Remove text from profile button
 		profileButton.setText("");
 
-		//Filters
-		//multiple
-		testFilters.setText("Various options");
-
-
 		//Main Page HBox
 		System.out.println("Test Query");
 		String test [][] = queryTest();
@@ -97,20 +105,60 @@ public class Contoller {
 				mainPageSPane.setHvalue(mainPageSPane.getHvalue() - event.getDeltaY() / mainPageSPane.getWidth() * 3 );
 			}
 		});
-		for(int i = 0; i < test[0].length; i++) {
+		for(int i = 0; i < 5; i++) {
 			mainPageHBox.getChildren().add(mainPageResults(i));
 			System.out.println("EEE");
 		}
+		Connection myConnection=null;
+		try {
+			myConnection = DriverManager.getConnection("jdbc:mysql://92.178.96.124:3306","judit","1234");
+		} catch (SQLException e) {
+			myConnection = DriverManager.getConnection("jdbc:mysql://92.178.96.124:3306","judit","1234");
+			System.out.println("ee");
+			e.printStackTrace();
+		}
+		System.out.println("DB conected");
+		Statement myStatement = myConnection.createStatement();
+		ResultSet zonesRS = myStatement.executeQuery("SELECT Zone FROM HomeIn.Property Group By Zone");
+		ArrayList<MenuItem> zonesMIAR = new ArrayList(); 
+		while(zonesRS.next()) {
+			zonesMIAR.add(new MenuItem(zonesRS.getString(1)));
+		
+		}
+		for(MenuItem mi : zonesMIAR) {
+			provincesBtn.getItems().add(mi);
+			mi.setOnAction((event) -> { 
+				province = ((MenuItem)event.getSource()).getText();
+				System.out.println(province);
+			});
+		}
+		ResultSet citysRS = myStatement.executeQuery("SELECT City FROM HomeIn.Property Group By City");
+		ArrayList<MenuItem> citysRSAR = new ArrayList(); 
+		while(citysRS.next()) {
+			citysRSAR.add(new MenuItem(citysRS.getString(1)));
+		
+		}
+		citysBtn.hide();
+		citysBtn.show();
+		for(MenuItem mi : citysRSAR) {
+			citysBtn.getItems().add(mi);
+			mi.setOnAction((event) -> { 
+				city = ((MenuItem)event.getSource()).getText();
+				System.out.println(city);
+			});
+		}
+		
 	}
 	public VBox mainPageResults(int i) throws SQLException, URISyntaxException{
 		String test [][] = queryTest();
 		VBox newVBox = new VBox();
 
-
-		Image homeBtnImage = new Image(getClass().getResource("img/icon.png").toURI().toString());
+		Image homeBtnImage = new Image(test[2][i]);
 		ImageView homeBtnImageView = new ImageView(homeBtnImage);
+		homeBtnImageView.setFitWidth(360);
+		homeBtnImageView.setFitHeight(360);
 		newVBox.getChildren().add(homeBtnImageView);
-		newVBox.getChildren().add(new Label(test[0][i] + "	" + test[1][i] ));
+		newVBox.getChildren().add(new Label(test[0][i] + "€	" + test[1][i] ));
 		newVBox.setAlignment(Pos.CENTER);
 		return newVBox;
 	}
@@ -132,29 +180,41 @@ public class Contoller {
 		Statement myStatement = myConnection.createStatement();
 
 		ResultSet myResSet = myStatement.executeQuery("SELECT Price,City,PropertyId FROM HomeIn.Property");
-		
+
 
 
 		ArrayList<String> priceAR = new ArrayList<String>();
 		ArrayList<String> cityAR= new ArrayList<String>();
 		ArrayList<String> propertysAR= new ArrayList<String>();
+		ArrayList<String> imagesAR= new ArrayList<String>();
 		while(myResSet.next() ) {
 			priceAR.add(myResSet.getString(1));
 			cityAR.add(myResSet.getString(2));
-			propertysAR.add(myResSet.getString(2));
+			propertysAR.add(myResSet.getString(3));
+
 		}
 
 		int length = priceAR.size();
-		if(length < 5) length = 5;
+		if(length > 5) length = 5;
 		String toReturn[][] = new String [3][length];
 		toReturn[0] = priceAR.toArray(new String[length]);
 		toReturn[1] = cityAR.toArray(new String[length]);
-		toReturn[2] = propertysAR.toArray(new String[length]);
-		
-		System.out.println("SELECT ImageLink FROM ImageList Group By PropertyId");
-		ResultSet myResSet2 = myStatement.executeQuery("SELECT ImageLink FROM HomeIn.ImageList Group By PropertyId");
-		
-		
+
+		String allIds = "";
+		for(int i = 0; i<length;i++) {
+			allIds +=propertysAR.get(i);
+			if(i < length-1) allIds+=",";
+		}
+		System.out.println("SELECT ImageLink FROM HomeIn.ImageList"
+				+" WHERE PropertyId IN(" + allIds + ") Group By PropertyId");
+		ResultSet myResSet2 = myStatement.executeQuery("SELECT ImageLink FROM HomeIn.ImageList"
+				+" WHERE PropertyId IN(" + allIds + ") Group By PropertyId");
+
+		while(myResSet2.next()) {
+			imagesAR.add(myResSet2.getString(1));
+		}
+		toReturn[2] = imagesAR.toArray(new String[length]);
+
 		return toReturn;
 
 	}
@@ -186,4 +246,33 @@ public class Contoller {
 		stage.show();
 	}
 
+
+
+	public void setRental(ActionEvent E) {
+		String bName = ((MenuItem)E.getSource()).getText();
+		System.out.println(bName);
+		if(bName.equals("Si")) {
+			Contoller.rental = true;
+		}else {
+			Contoller.rental = false;
+		}
+		System.out.println(Contoller.rental);
+	}
+
+
+	public boolean isRental() {
+		return rental;
+	}
+	public static void setRental(boolean rental) {
+		Contoller.rental = rental;
+	}
+	public String getProvince() {
+		return province;
+	}
+	public  void setProvince(ActionEvent E) throws SQLException {
+		//provincesBtn
+
+
+
+	}
 }

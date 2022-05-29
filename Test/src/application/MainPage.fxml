@@ -15,30 +15,51 @@
          <children>
             <Button id="btn" fx:id="homeButton" layoutX="43.0" layoutY="25.0" mnemonicParsing="false" onAction="#test" stylesheets="@css/homeBtn.css" text="HomeIn " />
             <Button id="profBtn" fx:id="profileButton" layoutX="1145.0" layoutY="31.0" mnemonicParsing="false" onAction="#toProfile" stylesheets="@css/homeBtn.css" text="Button" />
-            <MenuButton id="filters" fx:id="testFilters" alignment="CENTER" contentDisplay="CENTER" layoutX="460.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Various options" textAlignment="CENTER">
+            <MenuButton id="filters" fx:id="testFilters" alignment="CENTER" contentDisplay="CENTER" layoutX="308.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Lloguer" textAlignment="CENTER">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#test" text="Test Action" />
-                  <MenuItem mnemonicParsing="false" onAction="#test" text="Test Action 2" />
-                  <MenuItem mnemonicParsing="false" onAction="#test" text="Test Action 3" />
+                  <MenuItem mnemonicParsing="false" onAction="#setRental" text="Si" />
+                  <MenuItem mnemonicParsing="false" onAction="#setRental" text="No" />
                </items>
                </MenuButton>
-            <MenuButton id="filters" alignment="CENTER" contentDisplay="CENTER" layoutX="640.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Various filters" textAlignment="CENTER">
+            <MenuButton id="filters" alignment="CENTER" contentDisplay="CENTER" layoutX="865.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Various filters" textAlignment="CENTER">
                <items>
-                  <Menu mnemonicParsing="false" text="CustomFilter">
+                  <Menu mnemonicParsing="false" text="Rooms">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#test" text="Example Filter Option" />
-                        <MenuItem mnemonicParsing="false" onAction="#test" text="Example Filter Option" />
+                        <MenuItem mnemonicParsing="false" onAction="#test" text="1" />
+                        <MenuItem mnemonicParsing="false" onAction="#test" text="2" />
+                        <MenuItem mnemonicParsing="false" onAction="#test" text="3" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Banys">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#test" text="1" />
+                        <MenuItem mnemonicParsing="false" onAction="#test" text="2" />
+                        <MenuItem mnemonicParsing="false" onAction="#test" text="3" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Parquing">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#test" text="Si" />
+                        <MenuItem mnemonicParsing="false" onAction="#test" text="No" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Acenssor">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#test" text="Si" />
+                        <MenuItem mnemonicParsing="false" onAction="#test" text="No" />
                      </items>
                   </Menu>
                </items>
             </MenuButton>
+            <MenuButton id="filters" fx:id="provincesBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="495.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Provincia" textAlignment="CENTER" />
+            <MenuButton id="filters" fx:id="citysBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="680.0" layoutY="36.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Ciutat" textAlignment="CENTER" />
          </children>
       </AnchorPane>
    </top>
    <center>
       <ScrollPane fx:id="mainPageSPane" pannable="true" prefHeight="200.0" prefWidth="1280.0" vbarPolicy="NEVER" vmax="0.0" BorderPane.alignment="CENTER">
          <content>
-            <HBox fx:id="mainPageHBox" prefHeight="619.0" prefWidth="1280.0" />
+            <HBox fx:id="mainPageHBox" prefHeight="619.0" prefWidth="1280.0" stylesheets="@css/mainPageResults.css" />
          </content>
       </ScrollPane>
    </center>
