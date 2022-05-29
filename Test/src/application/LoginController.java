@@ -88,7 +88,7 @@ public class LoginController {
 
 
 
-	//Switch to main page 
+	//Switch to main page
 	public void toMainPage(ActionEvent event) throws IOException {
 		Contoller.setHasLogged(loged);
 		if(loged) {

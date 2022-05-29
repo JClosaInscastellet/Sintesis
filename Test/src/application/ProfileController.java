@@ -31,7 +31,6 @@ public class ProfileController {
 			e.printStackTrace();
 
 		}
-		//
 		Statement myStatement = myConnection.createStatement();
 		ResultSet nameSurname = myStatement.executeQuery("SELECT Name,LastName,Mail FROM HomeIn.User WHERE UserId = "+Contoller.getUID());
 
