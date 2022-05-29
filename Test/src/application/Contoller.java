@@ -164,7 +164,7 @@ public class Contoller {
 		homeBtnImageView.setFitWidth(360);
 		homeBtnImageView.setFitHeight(360);
 		newVBox.getChildren().add(homeBtnImageView);
-		newVBox.getChildren().add(new Label(test[0][i] + "â‚¬	" + test[1][i] ));
+		newVBox.getChildren().add(new Label(test[0][i] + "€	" + test[1][i] ));
 		newVBox.setAlignment(Pos.CENTER);
 		return newVBox;
 	}

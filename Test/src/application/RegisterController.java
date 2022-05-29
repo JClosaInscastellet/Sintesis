@@ -38,7 +38,7 @@ public class RegisterController {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-
+//
 
 	public void checkAccount(ActionEvent event) throws SQLException, IOException {
 		name = nameTField.getText();

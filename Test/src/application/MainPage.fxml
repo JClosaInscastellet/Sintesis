@@ -15,7 +15,7 @@
          <children>
             <Button id="btn" fx:id="homeButton" layoutX="43.0" layoutY="25.0" mnemonicParsing="false" onAction="#test" stylesheets="@css/homeBtn.css" text="HomeIn " />
             <Button id="profBtn" fx:id="profileButton" layoutX="1145.0" layoutY="31.0" mnemonicParsing="false" onAction="#toProfile" stylesheets="@css/homeBtn.css" text="Button" />
-            <MenuButton id="filters" fx:id="testFilters" alignment="CENTER" contentDisplay="CENTER" layoutX="308.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Lloguer" textAlignment="CENTER">
+            <MenuButton id="filters" fx:id="testFilters" alignment="CENTER " contentDisplay="CENTER" layoutX="308.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Lloguer" textAlignment="CENTER">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#setRental" text="Si" />
                   <MenuItem mnemonicParsing="false" onAction="#setRental" text="No" />

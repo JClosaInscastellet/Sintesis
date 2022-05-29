@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 
 public class Main extends Application {
 	
-	@Override
+	@Override 
 	public void start(Stage primaryStage) {
 		try {
 			//Set title
