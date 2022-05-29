@@ -31,7 +31,7 @@
                <font>
                   <Font name="Montserrat Regular" size="24.0" />
                </font></TextArea>
-            <Label layoutX="522.0" layoutY="316.0" text="Dades extra">
+            <Label layoutX="522.0" layoutY="316.0" text="Dades extra:">
                <font>
                   <Font name="Montserrat Regular" size="36.0" />
                </font>

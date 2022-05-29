@@ -36,7 +36,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author Judit Closa
+ * 
+ *
+ */
 public class Contoller {
 
 	//Set elements to use from fxml
@@ -67,9 +72,9 @@ public class Contoller {
 	private static boolean rental;
 	private static boolean parking;
 	private static boolean elevator;
-	@FXML MenuButton provincesBtn;
+	@FXML MenuButton zonesBtn;
 	@FXML MenuButton citysBtn;
-	private static String province;
+	private static String zone;
 	private static String city;
 	private static int rooms;
 	private static int bathRooms;
@@ -119,19 +124,7 @@ public class Contoller {
 		}
 		System.out.println("DB conected");
 		Statement myStatement = myConnection.createStatement();
-		ResultSet zonesRS = myStatement.executeQuery("SELECT Zone FROM HomeIn.Property Group By Zone");
-		ArrayList<MenuItem> zonesMIAR = new ArrayList(); 
-		while(zonesRS.next()) {
-			zonesMIAR.add(new MenuItem(zonesRS.getString(1)));
 		
-		}
-		for(MenuItem mi : zonesMIAR) {
-			provincesBtn.getItems().add(mi);
-			mi.setOnAction((event) -> { 
-				province = ((MenuItem)event.getSource()).getText();
-				System.out.println(province);
-			});
-		}
 		ResultSet citysRS = myStatement.executeQuery("SELECT City FROM HomeIn.Property Group By City");
 		ArrayList<MenuItem> citysRSAR = new ArrayList(); 
 		while(citysRS.next()) {
@@ -147,8 +140,21 @@ public class Contoller {
 				System.out.println(city);
 			});
 		}
+		ResultSet zonesRS = myStatement.executeQuery("SELECT Zone FROM HomeIn.Property Group By Zone");
+		ArrayList<MenuItem> zonesMIAR = new ArrayList(); 
+		while(zonesRS.next()) {
+			zonesMIAR.add(new MenuItem(zonesRS.getString(1)));
 		
+		}
+		for(MenuItem mi : zonesMIAR) {
+			zonesBtn.getItems().add(mi);
+			mi.setOnAction((event) -> { 
+				zone = ((MenuItem)event.getSource()).getText();
+				System.out.println(zone);
+			});
+		}
 	}
+	
 	public VBox mainPageResults(int i) throws SQLException, URISyntaxException{
 		String test [][] = queryTest();
 		VBox newVBox = new VBox();
@@ -266,13 +272,10 @@ public class Contoller {
 	public static void setRental(boolean rental) {
 		Contoller.rental = rental;
 	}
-	public String getProvince() {
-		return province;
+	public String getZone() {
+		return zone;
 	}
-	public  void setProvince(ActionEvent E) throws SQLException {
-		//provincesBtn
-
-
-
+	public  void setZone(ActionEvent E) throws SQLException {
+		//zonesBtn
 	}
 }

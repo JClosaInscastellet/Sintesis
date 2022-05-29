@@ -21,7 +21,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#setRental" text="No" />
                </items>
                </MenuButton>
-            <MenuButton id="filters" alignment="CENTER" contentDisplay="CENTER" layoutX="865.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Various filters" textAlignment="CENTER">
+            <MenuButton id="filters" alignment="CENTER" contentDisplay="CENTER" layoutX="865.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Altres" textAlignment="CENTER">
                <items>
                   <Menu mnemonicParsing="false" text="Rooms">
                      <items>
@@ -43,7 +43,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#test" text="No" />
                      </items>
                   </Menu>
-                  <Menu mnemonicParsing="false" text="Acenssor">
+                  <Menu mnemonicParsing="false" text="Ascensor">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#test" text="Si" />
                         <MenuItem mnemonicParsing="false" onAction="#test" text="No" />
@@ -51,8 +51,8 @@
                   </Menu>
                </items>
             </MenuButton>
-            <MenuButton id="filters" fx:id="provincesBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="495.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Provincia" textAlignment="CENTER" />
             <MenuButton id="filters" fx:id="citysBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="680.0" layoutY="36.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Ciutat" textAlignment="CENTER" />
+       		 <MenuButton id="filters" fx:id="zonesBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="495.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Zona" textAlignment="CENTER" />
          </children>
       </AnchorPane>
    </top>
