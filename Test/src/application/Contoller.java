@@ -50,14 +50,18 @@ public class Contoller {
 	@FXML private Button homeButton = new Button();
 	@FXML private Button profileButton = new Button();
 
+	//Menu buttons for filters
 	@FXML MenuButton testFilters = new MenuButton();
-
+	@FXML MenuButton zonesBtn;
+	@FXML MenuButton citysBtn;
+	
 	//Panes
 	@FXML BorderPane mainPagePane = new BorderPane();
 	@FXML HBox mainPageHBox;
 	@FXML ScrollPane mainPageSPane;
 
 	//Other vars
+	//Scroll
 	private int pos = 0;
 	private final int minPos = 0;
 	private final int maxPos = 100;
@@ -73,18 +77,20 @@ public class Contoller {
 	private static boolean rental;
 	private static boolean parking;
 	private static boolean elevator;
-	@FXML MenuButton zonesBtn;
-	@FXML MenuButton citysBtn;
 	private static String zone;
 	private static String city;
 	private static int rooms;
 	private static int bathRooms;
 	private static int maxPrice;
 
-	//Log file
-	
 
 	//Init method
+	/**
+	 * Javafx init method for the Main page controller
+	 * @throws URISyntaxException
+	 * @throws SQLException
+	 * @throws IOException
+	 */
 	public void initialize() throws URISyntaxException, SQLException, IOException {
 		Main.writeToLogFile("Entered Main page");
 
@@ -101,10 +107,11 @@ public class Contoller {
 		//Profile button
 		//Remove text from profile button
 		profileButton.setText("");
-
-
 		mainPageHBox.setSpacing(20); 
+		
 		Main.writeToLogFile("Init horintzontal scroll");
+		
+		//Change main page scroll to horizontal scroll
 		mainPageHBox.setOnScroll(new EventHandler<ScrollEvent>() {
 			@Override
 			public void handle(ScrollEvent event) {
@@ -112,30 +119,37 @@ public class Contoller {
 			}
 		});
 		Main.writeToLogFile("Adding results to main page");
+		
+		//Add main page propertys to the pane
 		for(int i = 0; i < 5; i++) {
 			mainPageHBox.getChildren().add(mainPageResults(i));
 			Main.writeToLogFile((i+1)+"/5");
 		}
+		//Connect to DB
 		Connection myConnection=null;
 		try {
 			myConnection = DriverManager.getConnection("jdbc:mysql://92.178.96.124:3306","judit","1234");
 		} catch (SQLException e) {
 			myConnection = DriverManager.getConnection("jdbc:mysql://92.178.96.124:3306","judit","1234");
-			System.out.println("ee");
 			e.printStackTrace();
 		}
 		Main.writeToLogFile("DB Connected");
 		Statement myStatement = myConnection.createStatement();
 
+		//Search avaliable citys
 		ResultSet citysRS = myStatement.executeQuery("SELECT City FROM HomeIn.Property Group By City");
 		Main.writeToLogFile("Init Filters");
 		ArrayList<MenuItem> citysRSAR = new ArrayList(); 
+		//Add city options to the filter menu
+		//First to the arraylist
 		while(citysRS.next()) {
 			citysRSAR.add(new MenuItem(citysRS.getString(1)));
 
 		}
+		//Init the button
 		citysBtn.hide();
 		citysBtn.show();
+		//Set events for the items on the arraylist and add them to the menu
 		for(MenuItem mi : citysRSAR) {
 			citysBtn.getItems().add(mi);
 			mi.setOnAction((event) -> { 
@@ -143,11 +157,12 @@ public class Contoller {
 				System.out.println(city);
 			});
 		}
+		//Do the same for the zones
 		ResultSet zonesRS = myStatement.executeQuery("SELECT Zone FROM HomeIn.Property Group By Zone");
 		ArrayList<MenuItem> zonesMIAR = new ArrayList(); 
 		while(zonesRS.next()) {
 			zonesMIAR.add(new MenuItem(zonesRS.getString(1)));
-
+ 
 		}
 		for(MenuItem mi : zonesMIAR) {
 			zonesBtn.getItems().add(mi);
@@ -158,6 +173,15 @@ public class Contoller {
 		}
 	}
 
+	
+	/**
+	 * Method to 
+	 * @param i
+	 * @return
+	 * @throws SQLException
+	 * @throws URISyntaxException
+	 * @throws IOException
+	 */
 	public VBox mainPageResults(int i) throws SQLException, URISyntaxException, IOException{
 		String test [][] = queryTest();
 		VBox newVBox = new VBox();
@@ -265,9 +289,20 @@ public class Contoller {
 		}
 		System.out.println(Contoller.rental);
 	}
-
-
-	public boolean isRental() {
+	public void setEleator(ActionEvent E) {
+		String bName = ((MenuItem)E.getSource()).getText();
+		System.out.println(bName);
+		if(bName.equals("Si")) {
+			Contoller.elevator = true;
+		}else {
+			Contoller.elevator = false;
+		}
+		System.out.println(Contoller.elevator);
+	}
+	public static boolean hasElevator() {
+		return elevator;
+	}
+	public static boolean isRental() {
 		return rental;
 	}
 	public static void setRental(boolean rental) {
