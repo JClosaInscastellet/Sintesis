@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -80,9 +81,12 @@ public class Contoller {
 	private static int bathRooms;
 	private static int maxPrice;
 
+	//Log file
+	
 
 	//Init method
-	public void initialize() throws URISyntaxException, SQLException {
+	public void initialize() throws URISyntaxException, SQLException, IOException {
+		Main.writeToLogFile("Entered Main page");
 
 		//Home button
 		//Import image
@@ -98,21 +102,19 @@ public class Contoller {
 		//Remove text from profile button
 		profileButton.setText("");
 
-		//Main Page HBox
-		System.out.println("Test Query");
-		String test [][] = queryTest();
 
 		mainPageHBox.setSpacing(20); 
-
+		Main.writeToLogFile("Init horintzontal scroll");
 		mainPageHBox.setOnScroll(new EventHandler<ScrollEvent>() {
 			@Override
 			public void handle(ScrollEvent event) {
 				mainPageSPane.setHvalue(mainPageSPane.getHvalue() - event.getDeltaY() / mainPageSPane.getWidth() * 3 );
 			}
 		});
+		Main.writeToLogFile("Adding results to main page");
 		for(int i = 0; i < 5; i++) {
 			mainPageHBox.getChildren().add(mainPageResults(i));
-			System.out.println("EEE");
+			Main.writeToLogFile((i+1)+"/5");
 		}
 		Connection myConnection=null;
 		try {
@@ -122,14 +124,15 @@ public class Contoller {
 			System.out.println("ee");
 			e.printStackTrace();
 		}
-		System.out.println("DB conected");
+		Main.writeToLogFile("DB Connected");
 		Statement myStatement = myConnection.createStatement();
-		
+
 		ResultSet citysRS = myStatement.executeQuery("SELECT City FROM HomeIn.Property Group By City");
+		Main.writeToLogFile("Init Filters");
 		ArrayList<MenuItem> citysRSAR = new ArrayList(); 
 		while(citysRS.next()) {
 			citysRSAR.add(new MenuItem(citysRS.getString(1)));
-		
+
 		}
 		citysBtn.hide();
 		citysBtn.show();
@@ -144,7 +147,7 @@ public class Contoller {
 		ArrayList<MenuItem> zonesMIAR = new ArrayList(); 
 		while(zonesRS.next()) {
 			zonesMIAR.add(new MenuItem(zonesRS.getString(1)));
-		
+
 		}
 		for(MenuItem mi : zonesMIAR) {
 			zonesBtn.getItems().add(mi);
@@ -154,16 +157,17 @@ public class Contoller {
 			});
 		}
 	}
-	
-	public VBox mainPageResults(int i) throws SQLException, URISyntaxException{
+
+	public VBox mainPageResults(int i) throws SQLException, URISyntaxException, IOException{
 		String test [][] = queryTest();
 		VBox newVBox = new VBox();
-
+		Main.writeToLogFile("Setting Image");
 		Image homeBtnImage = new Image(test[2][i]);
 		ImageView homeBtnImageView = new ImageView(homeBtnImage);
 		homeBtnImageView.setFitWidth(360);
 		homeBtnImageView.setFitHeight(360);
 		newVBox.getChildren().add(homeBtnImageView);
+		Main.writeToLogFile("Setting label");
 		newVBox.getChildren().add(new Label(test[0][i] + "€	" + test[1][i] ));
 		newVBox.setAlignment(Pos.CENTER);
 		return newVBox;
@@ -172,27 +176,27 @@ public class Contoller {
 	public void test(ActionEvent E) {	
 		System.out.println("e");
 	}
-	public String[][] queryTest() throws SQLException {
+	public String[][] queryTest() throws SQLException, IOException {
 		Connection myConnection=null;
 		try {
 			System.out.println("ControllerDB");
 			myConnection = DriverManager.getConnection("jdbc:mysql://92.178.96.124:3306","test","1234");
 		} catch (SQLException e) {
-			myConnection = DriverManager.getConnection("jdbc:mysql://92.178.96.124:3306","test","1234");
-			System.out.println("ee");
-			e.printStackTrace();
+			myConnection = DriverManager.getConnection("jdbc:mysql://92.178.96.124:3306","test","1234");			e.printStackTrace();
 
 		}
+		Main.writeToLogFile("DB Connected");
 		Statement myStatement = myConnection.createStatement();
 
 		ResultSet myResSet = myStatement.executeQuery("SELECT Price,City,PropertyId FROM HomeIn.Property");
-
+		
 
 
 		ArrayList<String> priceAR = new ArrayList<String>();
 		ArrayList<String> cityAR= new ArrayList<String>();
 		ArrayList<String> propertysAR= new ArrayList<String>();
 		ArrayList<String> imagesAR= new ArrayList<String>();
+		Main.writeToLogFile("Getting propertires from DB");
 		while(myResSet.next() ) {
 			priceAR.add(myResSet.getString(1));
 			cityAR.add(myResSet.getString(2));
@@ -211,16 +215,13 @@ public class Contoller {
 			allIds +=propertysAR.get(i);
 			if(i < length-1) allIds+=",";
 		}
-		System.out.println("SELECT ImageLink FROM HomeIn.ImageList"
-				+" WHERE PropertyId IN(" + allIds + ") Group By PropertyId");
 		ResultSet myResSet2 = myStatement.executeQuery("SELECT ImageLink FROM HomeIn.ImageList"
 				+" WHERE PropertyId IN(" + allIds + ") Group By PropertyId");
-
 		while(myResSet2.next()) {
 			imagesAR.add(myResSet2.getString(1));
 		}
 		toReturn[2] = imagesAR.toArray(new String[length]);
-
+		Main.writeToLogFile("Connection Succesfull");
 		return toReturn;
 
 	}

@@ -36,34 +36,37 @@ public class LoginController {
 	
 
 	
-	public void initialize() {
-
+	public void initialize() throws IOException {
+		Main.writeToLogFile("Application Started");
 	}
 
 	public void checkUser(ActionEvent event) throws SQLException, IOException {
+		Main.writeToLogFile("Login started");
 		boolean canLogin = false;
-		System.out.println("EEEE");
 		Connection myConnection=null;
 		try {
 			myConnection = DriverManager.getConnection("jdbc:mysql://92.178.96.124:3306","judit","1234");
 		} catch (SQLException e) {
 			myConnection = DriverManager.getConnection("jdbc:mysql://92.178.96.124:3306","judit","1234");
-			System.out.println("ee");
 			e.printStackTrace();
 
 		}
-		System.out.println("DB conected");
+		Main.writeToLogFile("DB Connected");
 		Statement myStatement = myConnection.createStatement();
 		ResultSet userPassword = myStatement.executeQuery("SELECT Mail,Password FROM HomeIn.User");
 		
 		userStr = user.getText();
 		passStr = password.getText();
 		System.out.println(userStr +"+"+passStr);
-		
+		Main.writeToLogFile("Checking credentials for: ");
+		Main.writeToLogFile("User: userStr");
+		Main.writeToLogFile("Password:"+ passStr);
+
+
 		while(userPassword.next()) {
 			if(userPassword.getString(1).equals(userStr) && userPassword.getString(2).equals(passStr)) {
 				canLogin = true;
-				System.out.println("Eureca");
+				Main.writeToLogFile("User found!");
 			}
 
 		}
@@ -71,14 +74,16 @@ public class LoginController {
 		ResultSet uid = myStatement.executeQuery("SELECT UserId From HomeIn.User WHERE Mail LIKE '"+userStr+"'");
 		while(uid.next()) {
 			uidInt = Integer.parseInt(uid.getString(1));
-			System.out.println(uidInt);
+			Main.writeToLogFile("Saved UserId: "+uidInt);
 		}
 		
 		if(canLogin==true) {
 			loged = true;
+			Main.writeToLogFile("Login Correct");
 			toMainPage(event);
 		}else {
 			incorrectLogin.setText("Incorrect Mail/Password!");
+			Main.writeToLogFile("Login Failed: User Not found");
 		}
 		
 		
@@ -86,10 +91,11 @@ public class LoginController {
 	}
 
 
-
+  
 
 	//Switch to main page
 	public void toMainPage(ActionEvent event) throws IOException {
+		Main.writeToLogFile("Loading Main page");
 		Contoller.setHasLogged(loged);
 		if(loged) {
 			Contoller.setUID(uidInt);
@@ -101,6 +107,7 @@ public class LoginController {
 		stage.show();
 	}
 	public void toRegisterPage(ActionEvent event) throws IOException {
+		Main.writeToLogFile("Loaging register page");
 		root = FXMLLoader.load(getClass().getResource("RegisterScreen.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);

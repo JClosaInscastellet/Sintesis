@@ -41,6 +41,7 @@ public class RegisterController {
 
 
 	public void checkAccount(ActionEvent event) throws SQLException, IOException {
+		Main.writeToLogFile("Checking new Credentials");
 		name = nameTField.getText();
 		surname = surnameTField.getText();
 		mail = mailTField.getText();
@@ -50,6 +51,7 @@ public class RegisterController {
 		String maxUID = null;
 
 		Connection myConnection=null;
+		Main.writeToLogFile("DB connected");
 		try {
 			myConnection = DriverManager.getConnection("jdbc:mysql://192.168.1.99:3306","judit","1234");
 		} catch (SQLException e) {
@@ -73,7 +75,9 @@ public class RegisterController {
 		}
 		if(!canRegister) {
 			errorUserExists.setText("User already exists!");
+			Main.writeToLogFile("Cant register: User exists");
 		}else {
+			Main.writeToLogFile("Login Correct");
 			myStatement.executeUpdate("INSERT INTO HomeIn.User (UserId,Name,LastName,Mail,City,Password) VALUES('"
 					+maxUID+"', '"+name+"', '"+surname+"', '"+mail+"', '"+city+"', '"+password+"')");
 			toLogin(event);
@@ -85,6 +89,7 @@ public class RegisterController {
 
 	//Switch to main page
 	public void toLogin(ActionEvent event) throws IOException {
+		Main.writeToLogFile("Loading login page");
 		root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);

@@ -1,5 +1,8 @@
 package application;
 	
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -8,6 +11,8 @@ import javafx.scene.Scene;
 
 
 public class Main extends Application {
+	
+	static FileWriter logFile;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -21,7 +26,7 @@ public class Main extends Application {
 
 			//Create Scenes
 			Scene loginScreenScene = new Scene(loginScreen,1280,720);
-
+			
 			
 			
 			//Set scene
@@ -34,9 +39,19 @@ public class Main extends Application {
 		}
 	}
 	
-	public static void main(String[] args)  {
+	public static void main(String[] args)   {
+		try {
+			logFile = new FileWriter("./log.txt");
+			System.out.println(logFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		launch(args);
-
 		
+		
+	}
+	public static void writeToLogFile(String text) throws IOException {
+		logFile.write(text+"\n");
+		logFile.flush();
 	}
 }
