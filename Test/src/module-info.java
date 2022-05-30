@@ -5,6 +5,7 @@ module Test {
 	requires javafx.base;
 	requires java.sql;
 	requires mysql.connector.java;
+	requires org.apache.commons.net;
 	
 	opens application to javafx.graphics, javafx.fxml;
 }
