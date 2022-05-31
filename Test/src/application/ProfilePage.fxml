@@ -10,11 +10,11 @@
 
 <BorderPane id="mainBPane" fx:id="mainPagePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProfileController">
    <top>
-      <AnchorPane prefHeight="111.0" prefWidth="1280.0" style="-fx-background-color: springgreen;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="111.0" prefWidth="1280.0" style="-fx-background-color: #3CB371;" BorderPane.alignment="CENTER">
          <children>
             <Button id="btn" layoutX="43.0" layoutY="25.0" mnemonicParsing="false" stylesheets="@css/homeBtn.css" text="HomeIn " />
-            <Button id="profBtn" layoutX="1145.0" layoutY="31.0" mnemonicParsing="false" stylesheets="@css/homeBtn.css" text="Button" />
-            <Button id="arrowBtn" fx:id="backButton" layoutX="1056.0" layoutY="32.0" mnemonicParsing="false" onAction="#pullBack" stylesheets="@css/homeBtn.css" />
+            <Button id="favBtn" layoutX="1145.0" layoutY="31.0" mnemonicParsing="false" onAction="#showFav" stylesheets="@css/homeBtn.css" />
+            <Button id="arrowBtn" fx:id="backButton" layoutX="1056.0" layoutY="32.0" mnemonicParsing="false" onAction="#pullBack" rotate="-90.0" stylesheets="@css/homeBtn.css" />
          </children>
       </AnchorPane>
    </top>

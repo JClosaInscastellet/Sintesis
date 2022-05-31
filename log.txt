@@ -1,0 +1,45 @@
+Application Started
+Login started
+DB Connected
+Checking credentials for: 
+User: E
+Password:1234
+User found!
+Saved UserId: 60
+Login Correct
+Loading Main page
+Entered Main page
+Init horintzontal scroll
+Adding results to main page
+DB Connected
+Getting propertires from DB
+Connection Succesfull
+Setting Image
+Setting label
+1/5
+DB Connected
+Getting propertires from DB
+Connection Succesfull
+Setting Image
+Setting label
+2/5
+DB Connected
+Getting propertires from DB
+Connection Succesfull
+Setting Image
+Setting label
+3/5
+DB Connected
+Getting propertires from DB
+Connection Succesfull
+Setting Image
+Setting label
+4/5
+DB Connected
+Getting propertires from DB
+Connection Succesfull
+Setting Image
+Setting label
+5/5
+DB Connected
+Init Filters

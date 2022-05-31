@@ -52,6 +52,8 @@ public class ProfileController {
 	TextField ProfileImg;
 	@FXML 
 	Button backButton;
+	@FXML 
+	Button favButton;
 	//Vars
 	private Stage stage;
 	private Scene scene;
@@ -210,6 +212,16 @@ public class ProfileController {
 	}
 	
 	public void pullBack(ActionEvent event) throws IOException {
+		
+		root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	public void showFav(ActionEvent event) throws IOException {
 		
 		root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
 
