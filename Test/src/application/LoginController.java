@@ -103,7 +103,7 @@ public class LoginController {
 			Main.writeToLogFile("Login Correct");
 			toMainPage(event);
 		}else {
-			incorrectLogin.setText("Incorrect Mail/Password!");
+			incorrectLogin.setText("Usuari/contrasenya incorrectes!");
 			Main.writeToLogFile("Login Failed: User Not found");
 		}
 		

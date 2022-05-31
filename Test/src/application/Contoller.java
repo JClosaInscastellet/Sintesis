@@ -58,6 +58,7 @@ public class Contoller {
 	@FXML BorderPane mainPagePane = new BorderPane();
 	@FXML HBox mainPageHBox;
 	@FXML ScrollPane mainPageSPane;
+	@FXML Label incorrectFilter; 
 
 	//Other vars
 	//Scroll
@@ -81,6 +82,7 @@ public class Contoller {
 	private static int rooms;
 	private static int bathRooms;
 	private static int maxPrice = 0;
+	
 
 
 	//Init method
@@ -409,8 +411,9 @@ public class Contoller {
 	 * Method to search based on filters
 	 * @param E
 	 * @throws SQLException
+	 * @throws IOException 
 	 */
-	public void search(ActionEvent E) throws SQLException {
+	public void search(ActionEvent event) throws SQLException, IOException {
 		String whereFilters="";
 		if(rental) {
 			whereFilters+=" Rental Like '1' AND ";	
@@ -462,9 +465,24 @@ public class Contoller {
 			e.printStackTrace();
 		}
 		Statement myStatement = myConnection.createStatement();
+		
 		ResultSet resultsRs = myStatement .executeQuery("Select PropertyId From HomeIn.Property WHERE " + whereFilters + " '1' LIKE '1'");
 		System.out.println("Select PropertyId From HomeIn.Property WHERE " + whereFilters + " '1' LIKE '1'");
+		if(resultsRs.wasNull()) {
+			incorrectFilter.setText("No s'han trobat resultats");
+			Main.writeToLogFile("Login Failed: Property Not found");
+			root = FXMLLoader.load(getClass().getResource("ProfilePage.fxml"));
+		}else {
+			root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
+		}
+		//Set stage and scenetrue
+				stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+				scene = new Scene(root);
+				stage.setScene(scene);
+				//Show stage
+				stage.show();
 	}
+	
 
 	public static boolean hasElevator() {
 		return elevator;

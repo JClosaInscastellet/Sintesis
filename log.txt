@@ -43,3 +43,4 @@ Setting label
 5/5
 DB Connected
 Init Filters
+Application Started
