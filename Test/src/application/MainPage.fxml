@@ -15,32 +15,44 @@
          <children>
             <Button id="btn" fx:id="homeButton" layoutX="43.0" layoutY="25.0" mnemonicParsing="false" onAction="#test" stylesheets="@css/homeBtn.css" text="HomeIn " />
             <Button id="profBtn" fx:id="profileButton" layoutX="1145.0" layoutY="31.0" mnemonicParsing="false" onAction="#toProfile" stylesheets="@css/homeBtn.css" text="Button" />
-            <MenuButton id="filters" fx:id="testFilters" alignment="CENTER" contentDisplay="CENTER" layoutX="308.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Lloguer" textAlignment="CENTER">
+            <MenuButton id="filters" fx:id="testFilters" alignment="CENTER" contentDisplay="CENTER" layoutX="249.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Lloguer" textAlignment="CENTER">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#setRental" text="Si" />
                   <MenuItem mnemonicParsing="false" onAction="#setRental" text="No" />
                </items>
                </MenuButton>
-            <MenuButton id="filters" alignment="CENTER" contentDisplay="CENTER" layoutX="865.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Altres" textAlignment="CENTER">
+            <MenuButton id="filters" alignment="CENTER" contentDisplay="CENTER" layoutX="806.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Altres" textAlignment="CENTER">
                <items>
-                  <Menu mnemonicParsing="false" text="Rooms">
+                  <Menu mnemonicParsing="false" text="Preu maxim">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#setPrice" text="500" />
+                        <MenuItem mnemonicParsing="false" onAction="#setPrice" text="1000" />
+                        <MenuItem mnemonicParsing="false" onAction="#setPrice" text="2000" />
+                        <MenuItem mnemonicParsing="false" onAction="#setPrice" text="50000" />
+                        <MenuItem mnemonicParsing="false" onAction="#setPrice" text="100000" />
+                        <MenuItem mnemonicParsing="false" onAction="#setPrice" text="150000" />
+                        <MenuItem mnemonicParsing="false" onAction="#setPrice" text="500000" />
+                        <MenuItem mnemonicParsing="false" onAction="#setPrice" text="1000000" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Habitacions">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#test" text="1" />
-                        <MenuItem mnemonicParsing="false" onAction="#test" text="2" />
-                        <MenuItem mnemonicParsing="false" onAction="#test" text="3" />
+                        <MenuItem mnemonicParsing="false" onAction="#setRooms" text="1" />
+                        <MenuItem mnemonicParsing="false" onAction="#setRooms" text="2" />
+                        <MenuItem mnemonicParsing="false" onAction="#setRooms" text="3 o Mes" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Banys">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#test" text="1" />
-                        <MenuItem mnemonicParsing="false" onAction="#test" text="2" />
-                        <MenuItem mnemonicParsing="false" onAction="#test" text="3" />
+                        <MenuItem mnemonicParsing="false" onAction="#setBathrooms" text="1" />
+                        <MenuItem mnemonicParsing="false" onAction="#setBathrooms" text="2" />
+                        <MenuItem mnemonicParsing="false" onAction="#setBathrooms" text="3 o mes" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Parquing">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#test" text="Si" />
-                        <MenuItem mnemonicParsing="false" onAction="#test" text="No" />
+                        <MenuItem mnemonicParsing="false" onAction="#setEleator" text="Si" />
+                        <MenuItem mnemonicParsing="false" onAction="#setPrking" text="No" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Ascensor">
@@ -51,8 +63,9 @@
                   </Menu>
                </items>
             </MenuButton>
-            <MenuButton id="filters" fx:id="citysBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="680.0" layoutY="36.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Ciutat" textAlignment="CENTER" />
-       		 <MenuButton id="filters" fx:id="zonesBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="495.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Zona" textAlignment="CENTER" />
+            <MenuButton id="filters" fx:id="citysBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="621.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Ciutat" textAlignment="CENTER" />
+       		 <MenuButton id="filters" fx:id="zonesBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="436.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Zona" textAlignment="CENTER" />
+            <Button id="serach" layoutX="998.0" layoutY="37.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="87.0" stylesheets="@css/homeBtn.css" text="CERCAR" />
          </children>
       </AnchorPane>
    </top>

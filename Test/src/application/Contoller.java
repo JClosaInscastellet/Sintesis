@@ -124,6 +124,7 @@ public class Contoller {
 			mainPageHBox.getChildren().add(mainPageResults(i));
 			Main.writeToLogFile((i+1)+"/5");
 		}
+		//----------
 		//Connect to DB
 		Connection myConnection=null;
 		try {
@@ -297,7 +298,7 @@ public class Contoller {
 		}else {
 			root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
 		}
-		//Set stage and scene
+		//Set stage and scenetrue
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -334,6 +335,89 @@ public class Contoller {
 		}
 		System.out.println(Contoller.elevator);
 	}
+	
+	/**
+	 * Sets the parking filter based on a menu
+	 * @param E
+	 */
+	public void setPrking(ActionEvent E) {
+		String bName = ((MenuItem)E.getSource()).getText();
+		System.out.println(bName);
+		if(bName.equals("Si")) {
+			Contoller.parking = true;
+		}else {
+			Contoller.parking = false;
+		}
+		System.out.println(Contoller.parking);
+	}
+	
+	/**
+	 * Sets the rooms filter based on a menu
+	 * @param E
+	 */
+	public void setRooms(ActionEvent E) {
+		String bName = ((MenuItem)E.getSource()).getText();
+		System.out.println(bName);
+		if(bName.equals("1")) {
+			Contoller.rooms = 1;
+		}else if(bName.equals("2")) {
+			Contoller.rooms = 1;
+		}else {
+			Contoller.rooms = 3;
+		}
+		
+		System.out.println(Contoller.parking);
+	}
+	/**
+	 * Sets the bathrooms filter based on a menu
+	 * @param E
+	 */
+	public void setBathrooms(ActionEvent E) {
+		String bName = ((MenuItem)E.getSource()).getText();
+		System.out.println(bName);
+		if(bName.equals("1")) {
+			Contoller.bathRooms = 1;
+		}else if(bName.equals("2")) {
+			Contoller.bathRooms = 1;
+		}else {
+			Contoller.bathRooms = 3;
+		}
+		
+		System.out.println(Contoller.bathRooms);
+	}
+	
+	/**
+	 * Sets the price filter based on a menu
+	 * @param E
+	 */
+	public void setPrice(ActionEvent E) {
+		String bName = ((MenuItem)E.getSource()).getText();
+		System.out.println(bName);
+		switch(bName) {
+		case "500": Contoller.maxPrice = Integer.parseInt(bName); break;
+		case "1000": Contoller.maxPrice = Integer.parseInt(bName); break;
+		case "2000": Contoller.maxPrice = Integer.parseInt(bName); break;
+		case "50000": Contoller.maxPrice = Integer.parseInt(bName); break;
+		case "150000": Contoller.maxPrice = Integer.parseInt(bName); break;
+		case "500000": Contoller.maxPrice = Integer.parseInt(bName); break;
+		case "1000000": Contoller.maxPrice = Integer.parseInt(bName); break;
+		}
+		
+		System.out.println(Contoller.maxPrice);
+	}
+	
+	public void search(ActionEvent E) throws SQLException {
+		Connection myConnection=null;
+		try {
+			System.out.println("ControllerDB");
+			myConnection = DriverManager.getConnection("jdbc:mysql://92.178.96.124:3306","test","1234");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		Statement myStatement = myConnection.createStatement();
+	//S	ResultSet resultsRs
+	}
+	
 	public static boolean hasElevator() {
 		return elevator;
 	}

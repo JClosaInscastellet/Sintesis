@@ -46,6 +46,15 @@
 	-fx-pref-width: 180px;
 	-fx-pref-height: 48px;
 }
+#serach{
+	-fx-padding: 10px;
+	-fx-background-radius: 10px 10px 10px 10px;
+	-fx-border-color: transparent;
+	-fx-background-color: white;
+	-fx-font-family: "Montserrat";
+	-fx-font-weight: bold;
+	-fx-pref-height: 48px;
+}
 #filtersOnRight{
 	-fx-border-color: transparent;
 	-fx-background-color: white;
