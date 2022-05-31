@@ -80,7 +80,7 @@ public class Contoller {
 	private static String city;
 	private static int rooms;
 	private static int bathRooms;
-	private static int maxPrice;
+	private static int maxPrice = 0;
 
 
 	//Init method
@@ -411,11 +411,6 @@ public class Contoller {
 	 * @throws SQLException
 	 */
 	public void search(ActionEvent E) throws SQLException {
-		/*
-		private static int rooms;
-		private static int bathRooms;
-		private static int maxPrice;
-		 */
 		String whereFilters="";
 		if(rental) {
 			whereFilters+=" Rental Like '1' AND ";	
@@ -443,8 +438,22 @@ public class Contoller {
 			whereFilters+=" Rooms > '2' AND ";	
 			break;
 		}
-
-
+		switch(bathRooms) {
+		case 1: 
+			whereFilters+=" Bathrooms Like '1' AND ";	
+			break;
+		case 2: 
+			whereFilters+=" Bathrooms Like '2' AND ";	
+			break;
+		case 3: 
+			whereFilters+=" Bathrooms > '2' AND ";	
+			break;
+		}
+		
+		if(maxPrice != 0) {
+			whereFilters+=" Price < '" + maxPrice + "' AND ";
+		}
+		
 		Connection myConnection=null;
 		try {
 			System.out.println("ControllerDB");
@@ -453,7 +462,7 @@ public class Contoller {
 			e.printStackTrace();
 		}
 		Statement myStatement = myConnection.createStatement();
-		//ResultSet resultsRs = myStatement .executeQuery("Select PropertyId From HomeIn.Property " + whereFilters + " '1' LIKE '1'");
+		ResultSet resultsRs = myStatement .executeQuery("Select PropertyId From HomeIn.Property WHERE " + whereFilters + " '1' LIKE '1'");
 		System.out.println("Select PropertyId From HomeIn.Property WHERE " + whereFilters + " '1' LIKE '1'");
 	}
 
