@@ -412,7 +412,6 @@ public class Contoller {
 	 */
 	public void search(ActionEvent E) throws SQLException {
 		/*
-		private static String city;
 		private static int rooms;
 		private static int bathRooms;
 		private static int maxPrice;
@@ -430,10 +429,22 @@ public class Contoller {
 		if(zone != null) {
 			whereFilters+=" Zone Like '" + zone + "' AND ";
 		}
-		if(zone != null) {
-			whereFilters+=" Zone Like '" + zone + "' AND ";
+		if(city != null) {
+			whereFilters+=" City Like '" + city + "' AND ";
 		}
-		
+		switch(rooms) {
+		case 1: 
+			whereFilters+=" Rooms Like '1' AND ";	
+			break;
+		case 2: 
+			whereFilters+=" Rooms Like '2' AND ";	
+			break;
+		case 3: 
+			whereFilters+=" Rooms > '2' AND ";	
+			break;
+		}
+
+
 		Connection myConnection=null;
 		try {
 			System.out.println("ControllerDB");
