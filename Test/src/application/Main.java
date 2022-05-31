@@ -10,7 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 /**
- * 
+ * Main class for this software
  * @author Judits
  *
  */

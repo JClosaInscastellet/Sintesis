@@ -33,7 +33,11 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-
+/**
+ * 
+ * @author Judits
+ *
+ */
 public class ProfileController {
 
 	@FXML
@@ -53,6 +57,12 @@ public class ProfileController {
 	private Scene scene;
 	private Parent root;
 
+	/**
+	 * Init class for the Profile Controller class
+	 * @throws SQLException
+	 * @throws URISyntaxException
+	 * @throws IOException
+	 */
 	public void initialize() throws SQLException, URISyntaxException, IOException {
 		// Get user Info
 		Connection myConnection = null;

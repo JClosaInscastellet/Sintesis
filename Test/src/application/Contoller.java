@@ -39,8 +39,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 /**
  * 
- * @author Judit Closa
- * 
+ * @author Judits
  *
  */
 public class Contoller {
@@ -54,7 +53,7 @@ public class Contoller {
 	@FXML MenuButton testFilters = new MenuButton();
 	@FXML MenuButton zonesBtn;
 	@FXML MenuButton citysBtn;
-	
+
 	//Panes
 	@FXML BorderPane mainPagePane = new BorderPane();
 	@FXML HBox mainPageHBox;
@@ -108,9 +107,9 @@ public class Contoller {
 		//Remove text from profile button
 		profileButton.setText("");
 		mainPageHBox.setSpacing(20); 
-		
+
 		Main.writeToLogFile("Init horintzontal scroll");
-		
+
 		//Change main page scroll to horizontal scroll
 		mainPageHBox.setOnScroll(new EventHandler<ScrollEvent>() {
 			@Override
@@ -119,7 +118,7 @@ public class Contoller {
 			}
 		});
 		Main.writeToLogFile("Adding results to main page");
-		
+
 		//Add main page propertys to the pane
 		for(int i = 0; i < 5; i++) {
 			mainPageHBox.getChildren().add(mainPageResults(i));
@@ -162,7 +161,7 @@ public class Contoller {
 		ArrayList<MenuItem> zonesMIAR = new ArrayList(); 
 		while(zonesRS.next()) {
 			zonesMIAR.add(new MenuItem(zonesRS.getString(1)));
- 
+
 		}
 		for(MenuItem mi : zonesMIAR) {
 			zonesBtn.getItems().add(mi);
@@ -173,9 +172,9 @@ public class Contoller {
 		}
 	}
 
-	
+
 	/**
-	 * Method to 
+	 * Method to add the propertires to the main page
 	 * @param i
 	 * @return
 	 * @throws SQLException
@@ -183,16 +182,22 @@ public class Contoller {
 	 * @throws IOException
 	 */
 	public VBox mainPageResults(int i) throws SQLException, URISyntaxException, IOException{
-		String test [][] = queryTest();
+		//Get the string with price, city and image
+		String test [][] = searchMainPageResults();
+		//Create new VBox
 		VBox newVBox = new VBox();
 		Main.writeToLogFile("Setting Image");
+		//Load image from repo
 		Image homeBtnImage = new Image(test[2][i]);
 		ImageView homeBtnImageView = new ImageView(homeBtnImage);
+		//Set image size
 		homeBtnImageView.setFitWidth(360);
 		homeBtnImageView.setFitHeight(360);
+		//add the image to the VBox
 		newVBox.getChildren().add(homeBtnImageView);
 		Main.writeToLogFile("Setting label");
-		newVBox.getChildren().add(new Label(test[0][i] + "€	" + test[1][i] ));
+		//Add labels with the text to the Vbox
+		newVBox.getChildren().add(new Label(test[0][i] + "â‚¬ " + test[1][i] ));
 		newVBox.setAlignment(Pos.CENTER);
 		return newVBox;
 	}
@@ -200,7 +205,14 @@ public class Contoller {
 	public void test(ActionEvent E) {	
 		System.out.println("e");
 	}
-	public String[][] queryTest() throws SQLException, IOException {
+	/**
+	 * Method returns a 2D array with Price,City and an Imgage from the propertyres table
+	 * @return 
+	 * @throws SQLException
+	 * @throws IOException
+	 */
+	public String[][] searchMainPageResults() throws SQLException, IOException {
+		//Create connection
 		Connection myConnection=null;
 		try {
 			System.out.println("ControllerDB");
@@ -213,13 +225,16 @@ public class Contoller {
 		Main.writeToLogFile("DB Connected");
 		Statement myStatement = myConnection.createStatement();
 
+		//Execute query
 		ResultSet myResSet = myStatement.executeQuery("SELECT Price,City,PropertyId FROM HomeIn.Property");
-		
 
-
+		//Save price
 		ArrayList<String> priceAR = new ArrayList<String>();
+		//City
 		ArrayList<String> cityAR= new ArrayList<String>();
+		//Id
 		ArrayList<String> propertysAR= new ArrayList<String>();
+		//Image link
 		ArrayList<String> imagesAR= new ArrayList<String>();
 		Main.writeToLogFile("Getting propertires from DB");
 		while(myResSet.next() ) {
@@ -229,19 +244,24 @@ public class Contoller {
 
 		}
 
+		//Numver of results to show
 		int length = priceAR.size();
 		if(length > 5) length = 5;
 		String toReturn[][] = new String [3][length];
+		//To array
 		toReturn[0] = priceAR.toArray(new String[length]);
 		toReturn[1] = cityAR.toArray(new String[length]);
 
+		//Add all ids to a var to get the images corresponding to the propertys
 		String allIds = "";
 		for(int i = 0; i<length;i++) {
 			allIds +=propertysAR.get(i);
 			if(i < length-1) allIds+=",";
 		}
+		//Execute querty
 		ResultSet myResSet2 = myStatement.executeQuery("SELECT ImageLink FROM HomeIn.ImageList"
 				+" WHERE PropertyId IN(" + allIds + ") Group By PropertyId");
+		//Add images to the array
 		while(myResSet2.next()) {
 			imagesAR.add(myResSet2.getString(1));
 		}
@@ -265,21 +285,31 @@ public class Contoller {
 		return uid;
 	}
 
+	/**
+	 * Loafs Profile page
+	 * @param event
+	 * @throws IOException
+	 */
 	public void toProfile(ActionEvent event) throws IOException {
+		//Load Fxml
 		if(isHasLogged()) {
 			root = FXMLLoader.load(getClass().getResource("ProfilePage.fxml"));
 		}else {
 			root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
 		}
-
+		//Set stage and scene
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
+		//Show stage
 		stage.show();
 	}
 
 
-
+	/**
+	 * Sets the rental filter based on a menu
+	 * @param E
+	 */
 	public void setRental(ActionEvent E) {
 		String bName = ((MenuItem)E.getSource()).getText();
 		System.out.println(bName);
@@ -290,6 +320,10 @@ public class Contoller {
 		}
 		System.out.println(Contoller.rental);
 	}
+	/**
+	 * Sets the elevator filter based on a menu
+	 * @param E
+	 */
 	public void setEleator(ActionEvent E) {
 		String bName = ((MenuItem)E.getSource()).getText();
 		System.out.println(bName);
