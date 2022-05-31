@@ -1,4 +1,12 @@
 Application Started
+Login started
+DB Connected
+Checking credentials for: 
+User: E
+Password:1234
+User found!
+Saved UserId: 60
+Login Correct
 Loading Main page
 Entered Main page
 Init horintzontal scroll
@@ -35,4 +43,3 @@ Setting label
 5/5
 DB Connected
 Init Filters
-Application Started

@@ -65,7 +65,7 @@
             </MenuButton>
             <MenuButton id="filters" fx:id="citysBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="621.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Ciutat" textAlignment="CENTER" />
        		 <MenuButton id="filters" fx:id="zonesBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="436.0" layoutY="37.0" mnemonicParsing="false" prefWidth="180.0" stylesheets="@css/homeBtn.css" text="Zona" textAlignment="CENTER" />
-            <Button id="serach" layoutX="998.0" layoutY="37.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="87.0" stylesheets="@css/homeBtn.css" text="CERCAR" />
+            <Button id="serach" layoutX="998.0" layoutY="37.0" mnemonicParsing="false" onAction="#search" prefHeight="24.0" prefWidth="87.0" stylesheets="@css/homeBtn.css" text="CERCAR" />
          </children>
       </AnchorPane>
    </top>

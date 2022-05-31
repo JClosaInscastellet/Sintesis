@@ -335,7 +335,7 @@ public class Contoller {
 		}
 		System.out.println(Contoller.elevator);
 	}
-	
+
 	/**
 	 * Sets the parking filter based on a menu
 	 * @param E
@@ -350,7 +350,7 @@ public class Contoller {
 		}
 		System.out.println(Contoller.parking);
 	}
-	
+
 	/**
 	 * Sets the rooms filter based on a menu
 	 * @param E
@@ -365,7 +365,7 @@ public class Contoller {
 		}else {
 			Contoller.rooms = 3;
 		}
-		
+
 		System.out.println(Contoller.parking);
 	}
 	/**
@@ -382,10 +382,10 @@ public class Contoller {
 		}else {
 			Contoller.bathRooms = 3;
 		}
-		
+
 		System.out.println(Contoller.bathRooms);
 	}
-	
+
 	/**
 	 * Sets the price filter based on a menu
 	 * @param E
@@ -402,11 +402,38 @@ public class Contoller {
 		case "500000": Contoller.maxPrice = Integer.parseInt(bName); break;
 		case "1000000": Contoller.maxPrice = Integer.parseInt(bName); break;
 		}
-		
+
 		System.out.println(Contoller.maxPrice);
 	}
-	
+	/**
+	 * Method to search based on filters
+	 * @param E
+	 * @throws SQLException
+	 */
 	public void search(ActionEvent E) throws SQLException {
+		/*
+		private static String city;
+		private static int rooms;
+		private static int bathRooms;
+		private static int maxPrice;
+		 */
+		String whereFilters="";
+		if(rental) {
+			whereFilters+=" Rental Like '1' AND ";	
+		}
+		if(parking) {
+			whereFilters+=" Parking Like '1' AND ";	
+		}
+		if(elevator) {
+			whereFilters+=" Elevator Like '1' AND ";	
+		}
+		if(zone != null) {
+			whereFilters+=" Zone Like '" + zone + "' AND ";
+		}
+		if(zone != null) {
+			whereFilters+=" Zone Like '" + zone + "' AND ";
+		}
+		
 		Connection myConnection=null;
 		try {
 			System.out.println("ControllerDB");
@@ -415,9 +442,10 @@ public class Contoller {
 			e.printStackTrace();
 		}
 		Statement myStatement = myConnection.createStatement();
-	//S	ResultSet resultsRs
+		//ResultSet resultsRs = myStatement .executeQuery("Select PropertyId From HomeIn.Property " + whereFilters + " '1' LIKE '1'");
+		System.out.println("Select PropertyId From HomeIn.Property WHERE " + whereFilters + " '1' LIKE '1'");
 	}
-	
+
 	public static boolean hasElevator() {
 		return elevator;
 	}
