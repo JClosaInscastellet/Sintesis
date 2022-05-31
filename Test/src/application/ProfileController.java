@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Random;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -91,10 +92,12 @@ public class ProfileController {
 		if (!validImage(imgFile)) {
 			throw new IOException();
 		}
-
+		String extraChars = "";
+		Random random = new Random();
+		extraChars = Integer.toString(random.nextInt(20000));
 		loadImageFromLocalMachine(imgFile);
-		storeFileInFtp(imgFile);
-		updateUserProfileImage(imgFile);
+		storeFileInFtp(imgFile,extraChars);
+		updateUserProfileImage(imgFile,extraChars);
 	}
 
 	/**
@@ -110,10 +113,10 @@ public class ProfileController {
 	 * 
 	 * @param imgFile
 	 */
-	private void updateUserProfileImage(File imgFile) {
-		String ftpFilePath = "http://92.178.96.124/ftpuser/" + imgFile.getName();
+	private void updateUserProfileImage(File imgFile,String extraChars) {
+		String ftpFilePath = "http://92.178.96.124/ftpuser/" + imgFile.getName()+extraChars;
 		int userId = Contoller.getUID();
-
+		
 		try {
 			Connection myConnection;
 			myConnection = DriverManager.getConnection("jdbc:mysql://92.178.96.124:3306", "judit", "1234");
@@ -132,7 +135,7 @@ public class ProfileController {
 	 * 
 	 * @param imgFile
 	 */
-	private void storeFileInFtp(File imgFile) {
+	private void storeFileInFtp(File imgFile,String extraChars) {
 		final String SFTP = "92.178.96.124";
 		final String USER = "ftpuser";
 		final String PASSWORD = "saurus12";
@@ -148,7 +151,7 @@ public class ProfileController {
 
 			FileInputStream fileToUpload = new FileInputStream(imgFile.getAbsolutePath());
 
-			client.storeFile(imgFile.getName(), fileToUpload);
+			client.storeFile(imgFile.getName()+extraChars, fileToUpload);
 
 		} catch (IOException ioe) {
 			System.out.println("Error in FTP");
@@ -163,7 +166,7 @@ public class ProfileController {
 	private void loadImageFromLocalMachine(File imgFile) throws FileNotFoundException {
 		// Load image from local machine
 		InputStream inputStream = new FileInputStream(imgFile.getAbsolutePath());
-
+		System.out.println(imgFile.getAbsolutePath());
 		try {
 			Image image = new Image(inputStream);
 			customProfileImg.setImage(image);
