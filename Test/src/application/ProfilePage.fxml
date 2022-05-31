@@ -14,7 +14,7 @@
          <children>
             <Button id="btn" layoutX="43.0" layoutY="25.0" mnemonicParsing="false" stylesheets="@css/homeBtn.css" text="HomeIn " />
             <Button id="profBtn" layoutX="1145.0" layoutY="31.0" mnemonicParsing="false" stylesheets="@css/homeBtn.css" text="Button" />
-            <Button id="profBtn" layoutX="1056.0" layoutY="32.0" mnemonicParsing="false" stylesheets="@css/homeBtn.css" text="Button" />
+            <Button id="arrowBtn" fx:id="backButton" layoutX="1056.0" layoutY="32.0" mnemonicParsing="false" onAction="#pullBack" stylesheets="@css/homeBtn.css" />
          </children>
       </AnchorPane>
    </top>

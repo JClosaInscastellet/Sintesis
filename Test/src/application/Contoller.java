@@ -69,7 +69,7 @@ public class Contoller {
 	private static boolean hasLogged;
 	private static int uid;
 
-	//TO siwtch scene
+	//TO switch scene
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
@@ -192,7 +192,7 @@ public class Contoller {
 		homeBtnImageView.setFitHeight(360);
 		newVBox.getChildren().add(homeBtnImageView);
 		Main.writeToLogFile("Setting label");
-		newVBox.getChildren().add(new Label(test[0][i] + "â‚¬	" + test[1][i] ));
+		newVBox.getChildren().add(new Label(test[0][i] + "€	" + test[1][i] ));
 		newVBox.setAlignment(Pos.CENTER);
 		return newVBox;
 	}
@@ -206,7 +206,8 @@ public class Contoller {
 			System.out.println("ControllerDB");
 			myConnection = DriverManager.getConnection("jdbc:mysql://92.178.96.124:3306","test","1234");
 		} catch (SQLException e) {
-			myConnection = DriverManager.getConnection("jdbc:mysql://92.178.96.124:3306","test","1234");			e.printStackTrace();
+			myConnection = DriverManager.getConnection("jdbc:mysql://92.178.96.124:3306","test","1234");			
+			e.printStackTrace();
 
 		}
 		Main.writeToLogFile("DB Connected");

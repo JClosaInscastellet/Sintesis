@@ -20,12 +20,17 @@ import org.apache.commons.net.ftp.FTPClientConfig;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class ProfileController {
@@ -40,6 +45,8 @@ public class ProfileController {
 	ImageView customProfileImg;
 	@FXML
 	TextField ProfileImg;
+	@FXML 
+	Button backButton;
 
 	public void initialize() throws SQLException, URISyntaxException, IOException {
 		// Get user Info
@@ -184,5 +191,15 @@ public class ProfileController {
 		fileChooser.setTitle("Tria una imatge de perfil");
 		File imgFile = fileChooser.showOpenDialog(null);
 		return imgFile;
+	}
+	
+	public void pullBack(ActionEvent event) throws IOException {
+		
+		root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 	}
 }
