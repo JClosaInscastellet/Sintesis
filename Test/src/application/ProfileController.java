@@ -22,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -47,6 +48,10 @@ public class ProfileController {
 	TextField ProfileImg;
 	@FXML 
 	Button backButton;
+	//Vars
+	private Stage stage;
+	private Scene scene;
+	private Parent root;
 
 	public void initialize() throws SQLException, URISyntaxException, IOException {
 		// Get user Info
@@ -127,7 +132,7 @@ public class ProfileController {
 		try {
 			Connection myConnection;
 			myConnection = DriverManager.getConnection("jdbc:mysql://92.178.96.124:3306", "judit", "1234");
-
+			System.out.println("Executing query");
 			PreparedStatement ps = myConnection
 					.prepareStatement("UPDATE HomeIn.User SET ProfileImage = ? WHERE UserId = ?");
 			ps.setString(1, ftpFilePath);
@@ -155,11 +160,11 @@ public class ProfileController {
 			client.setFileType(FTP.BINARY_FILE_TYPE);
 			client.setFileTransferMode(FTP.BINARY_FILE_TYPE);
 			client.enterLocalPassiveMode();
-
+			System.out.println("Ftp connected");
 			FileInputStream fileToUpload = new FileInputStream(imgFile.getAbsolutePath());
 
 			client.storeFile(imgFile.getName()+extraChars, fileToUpload);
-
+			System.out.println("ImgStored");
 		} catch (IOException ioe) {
 			System.out.println("Error in FTP");
 		}
@@ -190,6 +195,7 @@ public class ProfileController {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Tria una imatge de perfil");
 		File imgFile = fileChooser.showOpenDialog(null);
+		System.out.println("Got image from disc");
 		return imgFile;
 	}
 	
