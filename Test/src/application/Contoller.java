@@ -203,6 +203,16 @@ public class Contoller {
 			@Override
 			public void handle(MouseEvent event) {
 				PropertyViewController.pToShow = Integer.parseInt(test[3][i]);
+				try {
+					root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+				scene = new Scene(root);
+				stage.setScene(scene);
+				stage.show();
 				System.out.println(PropertyViewController.pToShow);
 			}
 		});
