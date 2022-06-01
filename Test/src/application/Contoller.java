@@ -53,7 +53,7 @@ public class Contoller {
 	@FXML MenuButton testFilters = new MenuButton();
 	@FXML MenuButton zonesBtn;
 	@FXML MenuButton citysBtn;
-	
+
 	//Labels
 	@FXML Label noResults;
 
@@ -63,7 +63,7 @@ public class Contoller {
 	@FXML ScrollPane mainPageSPane;
 
 	//Other vars
-	
+
 	//Scroll
 	private int pos = 0;
 	private final int minPos = 0;
@@ -460,7 +460,7 @@ public class Contoller {
 		if(maxPrice != 0) {
 			whereFilters+=" Price < '" + maxPrice + "' AND ";
 		}
-
+		//
 		Connection myConnection=null;
 		try {
 			System.out.println("ControllerDB");
@@ -472,7 +472,7 @@ public class Contoller {
 
 		ResultSet resultsRs = myStatement .executeQuery("Select PropertyId From HomeIn.Property WHERE " + whereFilters + " '1' LIKE '1'");
 		System.out.println("Select PropertyId From HomeIn.Property WHERE " + whereFilters + " '1' LIKE '1'");
-		
+
 		if(resultsRs.isBeforeFirst()) {
 			ArrayList<String> pIds = new ArrayList();
 			while(resultsRs.next()) {
@@ -492,7 +492,7 @@ public class Contoller {
 		}
 
 	}
-	
+
 	public static String[] avaliablePtrs() {
 		return toReturn;
 	}
