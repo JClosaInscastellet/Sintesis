@@ -476,21 +476,6 @@ public class Contoller {
 			stage.show();
 		}
 		
-		/*
-		if(resultsRs.wasNull()) {
-			incorrectFilter.setText("No s'han trobat resultats");
-			Main.writeToLogFile("Login Failed: Property Not found");
-			root = FXMLLoader.load(getClass().getResource("ProfilePage.fxml"));
-		}else {
-			root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
-		}
-		//Set stage and scenetrue
-				stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-				scene = new Scene(root);
-				stage.setScene(scene);
-				//Show stage
-				stage.show();
-		 */
 	}
 
 
