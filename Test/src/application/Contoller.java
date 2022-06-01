@@ -204,7 +204,7 @@ public class Contoller {
 			public void handle(MouseEvent event) {
 				PropertyViewController.pToShow = Integer.parseInt(test[3][i]);
 				try {
-					root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+					root = FXMLLoader.load(getClass().getResource("ShowProperty.fxml"));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -72,7 +72,7 @@ public class ResultsController {
 			public void handle(MouseEvent event) {
 				PropertyViewController.pToShow = Integer.parseInt(foundPropertys[i]);
 				try {
-					root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+					root = FXMLLoader.load(getClass().getResource("ShowProperty.fxml"));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
