@@ -14,7 +14,7 @@
             <Button id="arrowBtn" layoutX="1056.0" layoutY="32.0" mnemonicParsing="false" onAction="#pullBack" rotate="-90.0" stylesheets="@css/homeBtn.css" />
          </children>
       </AnchorPane>
-   </top>
+   </top>//
    <bottom>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
