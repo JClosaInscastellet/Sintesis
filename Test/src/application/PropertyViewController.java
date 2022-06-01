@@ -17,7 +17,7 @@ public class PropertyViewController {
 	private Scene scene;
 	private Parent root;
 	public static int pToShow;
-	
+
 	@FXML Label room;
 	@FXML Label bathroom;
 	@FXML Label surface;
@@ -26,10 +26,10 @@ public class PropertyViewController {
 	@FXML Label zone;
 	@FXML Label parking;
 	@FXML Label elevator;
-	
-	
+
+
 	public void pullBack(ActionEvent event) throws IOException {
-		
+
 		root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
 
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
