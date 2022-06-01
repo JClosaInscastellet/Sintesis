@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane id="mainBPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PropertyViewController">
+   <top>
+      <AnchorPane prefHeight="111.0" prefWidth="1280.0" style="-fx-background-color: #3CB371;" BorderPane.alignment="CENTER">
+         <children>
+            <Button id="btn" layoutX="43.0" layoutY="25.0" mnemonicParsing="false" onAction="#pullBack" stylesheets="@css/homeBtn.css" text="HomeIn " />
+            <Button id="favBtn" layoutX="1145.0" layoutY="31.0" mnemonicParsing="false" stylesheets="@css/homeBtn.css" />
+            <Button id="arrowBtn" layoutX="1056.0" layoutY="32.0" mnemonicParsing="false" onAction="#pullBack" rotate="-90.0" stylesheets="@css/homeBtn.css" />
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="74.0" layoutY="59.0" stylesheets="@css/mainPageResults.css" text="Label" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

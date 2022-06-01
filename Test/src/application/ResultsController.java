@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -32,7 +33,7 @@ public class ResultsController {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	
+
 	@FXML HBox searchPageHBox;
 	@FXML ScrollPane searchPageSP;
 	private String foundPropertys[] = Contoller.avaliablePtrs(); 
@@ -52,7 +53,7 @@ public class ResultsController {
 			searchPageHBox.getChildren().add(addElements(i));
 		}
 
-	
+
 
 	}
 	/**
@@ -62,17 +63,26 @@ public class ResultsController {
 	 */
 	public VBox addElements(int i) {
 		VBox newVBox = new VBox();
-		
+
 		Image pImage = new Image(propertysElementsStr[2][i]);
 		ImageView pImageView = new ImageView(pImage);
+		pImageView.setPickOnBounds(true);
+		pImageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				PropertyViewController.pToShow = Integer.parseInt(foundPropertys[i]);
+				System.out.println(PropertyViewController.pToShow);
+			}
+		});
 		pImageView.setFitWidth(360);
 		pImageView.setFitHeight(360);
 		newVBox.getChildren().add(pImageView);
 		newVBox.getChildren().add(new Label(propertysElementsStr[0][i] + "€ " + propertysElementsStr[1][i] ));
 		newVBox.setAlignment(Pos.CENTER);
+
 		return newVBox;
 	}
-	
+
 
 	public void propertysElements() throws SQLException{
 		ArrayList<String> images = new ArrayList();
@@ -104,7 +114,7 @@ public class ResultsController {
 		toReturn[2] = images.toArray(new String[foundPropertys.length]);
 		propertysElementsStr = toReturn;
 	}
-	
+
 	/**
 	 * 
 	 * @param event
@@ -119,7 +129,7 @@ public class ResultsController {
 		stage.setScene(scene);
 		stage.show();
 	}
-  
+
 }
 
 

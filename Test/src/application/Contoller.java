@@ -26,6 +26,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -197,6 +198,14 @@ public class Contoller {
 		//Load image from repo
 		Image homeBtnImage = new Image(test[2][i]);
 		ImageView homeBtnImageView = new ImageView(homeBtnImage);
+		homeBtnImageView.setPickOnBounds(true);
+		homeBtnImageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				PropertyViewController.pToShow = Integer.parseInt(test[3][i]);
+				System.out.println(PropertyViewController.pToShow);
+			}
+		});
 		//Set image size
 		homeBtnImageView.setFitWidth(360);
 		homeBtnImageView.setFitHeight(360);
@@ -248,17 +257,18 @@ public class Contoller {
 			priceAR.add(myResSet.getString(1));
 			cityAR.add(myResSet.getString(2));
 			propertysAR.add(myResSet.getString(3));
+			
 
 		}
 
-		//Numver of results to show
+		//Number of results to show
 		int length = priceAR.size();
 		if(length > 5) length = 5;
-		String toReturn[][] = new String [3][length];
+		String toReturn[][] = new String [4][length];
 		//To array
 		toReturn[0] = priceAR.toArray(new String[length]);
 		toReturn[1] = cityAR.toArray(new String[length]);
-
+		toReturn[3] = propertysAR.toArray(new String[length]);
 		//Add all ids to a var to get the images corresponding to the propertys
 		String allIds = "";
 		for(int i = 0; i<length;i++) {
