@@ -19,6 +19,13 @@
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="74.0" layoutY="59.0" stylesheets="@css/mainPageResults.css" text="Label" />
+            <Label id="room" layoutX="553.0" layoutY="130.0" stylesheets="@css/mainPageResults.css" text="Habitacions: " />
+            <Label id="bathroom" layoutX="553.0" layoutY="130.0" stylesheets="@css/mainPageResults.css" text="Banys: " />
+            <Label id="surface" layoutX="553.0" layoutY="130.0" stylesheets="@css/mainPageResults.css" text="Superficie: " />
+            <Label id="city" layoutX="553.0" layoutY="130.0" stylesheets="@css/mainPageResults.css" text="Ciutat: " />
+            <Label id="zone" layoutX="553.0" layoutY="130.0" stylesheets="@css/mainPageResults.css" text="Zona: " />
+            <Label id="parking" layoutX="553.0" layoutY="130.0" stylesheets="@css/mainPageResults.css" text="Parquing: " />
+            <Label id="elevator" layoutX="553.0" layoutY="130.0" stylesheets="@css/mainPageResults.css" text="Ascensor: " />
          </children>
       </AnchorPane>
    </center>
