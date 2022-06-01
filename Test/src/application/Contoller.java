@@ -69,7 +69,7 @@ public class Contoller {
 	private final int minPos = 0;
 	private final int maxPos = 100;
 	//To check if the user has logged
-	private static boolean hasLogged;
+	public static boolean hasLogged;
 	private static int uid;
 
 	//TO switch scene

@@ -10,7 +10,7 @@
    <top>
             <AnchorPane prefHeight="111.0" prefWidth="1280.0" style="-fx-background-color: #3CB371;" BorderPane.alignment="CENTER">
          <children>
-            <Button id="btn" layoutX="43.0" layoutY="25.0" mnemonicParsing="false" stylesheets="@css/homeBtn.css" text="HomeIn " />
+            <Button id="btn" layoutX="43.0" layoutY="25.0" mnemonicParsing="false" onAction="#toMainPage" stylesheets="@css/homeBtn.css" text="HomeIn " />
          </children>
       </AnchorPane>
    </top>
