@@ -44,4 +44,3 @@ Setting label
 DB Connected
 Init Filters
 Loaging register page
-Application Started

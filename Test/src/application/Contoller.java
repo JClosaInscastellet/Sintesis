@@ -53,6 +53,9 @@ public class Contoller {
 	@FXML MenuButton testFilters = new MenuButton();
 	@FXML MenuButton zonesBtn;
 	@FXML MenuButton citysBtn;
+	
+	//Labels
+	@FXML Label noResults;
 
 	//Panes
 	@FXML BorderPane mainPagePane = new BorderPane();
@@ -60,6 +63,7 @@ public class Contoller {
 	@FXML ScrollPane mainPageSPane;
 
 	//Other vars
+	
 	//Scroll
 	private int pos = 0;
 	private final int minPos = 0;
@@ -81,7 +85,7 @@ public class Contoller {
 	private static int rooms;
 	private static int bathRooms;
 	private static int maxPrice = 0;
-
+	private static String[] toReturn;
 
 
 	//Init method
@@ -94,6 +98,7 @@ public class Contoller {
 	public void initialize() throws URISyntaxException, SQLException, IOException {
 		Main.writeToLogFile("Entered Main page");
 
+		noResults.setText("");
 		//Home button
 		//Import image
 		Image homeBtnImage = new Image(getClass().getResource("img/homein.png").toURI().toString());
@@ -467,15 +472,29 @@ public class Contoller {
 
 		ResultSet resultsRs = myStatement .executeQuery("Select PropertyId From HomeIn.Property WHERE " + whereFilters + " '1' LIKE '1'");
 		System.out.println("Select PropertyId From HomeIn.Property WHERE " + whereFilters + " '1' LIKE '1'");
+		
 		if(resultsRs.isBeforeFirst()) {
+			ArrayList<String> pIds = new ArrayList();
+			while(resultsRs.next()) {
+				pIds.add(resultsRs.getString(1));
+			}
+			toReturn = pIds.toArray(new String [pIds.size()]);
+			System.out.println("EEE");
 			Main.writeToLogFile("Loaging register page");
 			root = FXMLLoader.load(getClass().getResource("PropertyScreen.fxml"));
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
+		}else {
+			noResults.setText("Sensse resultats!");
+			toReturn = null;
 		}
-		
+
+	}
+	
+	public static String[] avaliablePtrs() {
+		return toReturn;
 	}
 
 

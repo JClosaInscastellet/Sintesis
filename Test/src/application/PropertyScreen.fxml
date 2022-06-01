@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SearchController">
    <top>
@@ -14,10 +15,10 @@
       </AnchorPane>
    </top>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label id="logintext" fx:id="emptySearch" layoutX="553.0" layoutY="130.0" stylesheets="@css/login.css" text="Bieenn!!" />
-         </children>
-      </AnchorPane>
+      <ScrollPane fx:id="searchPageSP" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER" vmax="0.0" BorderPane.alignment="CENTER">
+         <content>
+            <HBox fx:id="searchPageHBox" prefHeight="608.0" prefWidth="1280.0" stylesheets="@css/mainPageResults.css" />
+         </content>
+      </ScrollPane>
    </center>
 </BorderPane>
