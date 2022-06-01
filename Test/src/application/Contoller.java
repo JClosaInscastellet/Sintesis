@@ -58,7 +58,6 @@ public class Contoller {
 	@FXML BorderPane mainPagePane = new BorderPane();
 	@FXML HBox mainPageHBox;
 	@FXML ScrollPane mainPageSPane;
-	@FXML Label incorrectFilter; 
 
 	//Other vars
 	//Scroll
@@ -82,7 +81,7 @@ public class Contoller {
 	private static int rooms;
 	private static int bathRooms;
 	private static int maxPrice = 0;
-	
+
 
 
 	//Init method
@@ -452,11 +451,11 @@ public class Contoller {
 			whereFilters+=" Bathrooms > '2' AND ";	
 			break;
 		}
-		
+
 		if(maxPrice != 0) {
 			whereFilters+=" Price < '" + maxPrice + "' AND ";
 		}
-		
+
 		Connection myConnection=null;
 		try {
 			System.out.println("ControllerDB");
@@ -465,9 +464,19 @@ public class Contoller {
 			e.printStackTrace();
 		}
 		Statement myStatement = myConnection.createStatement();
-		
+
 		ResultSet resultsRs = myStatement .executeQuery("Select PropertyId From HomeIn.Property WHERE " + whereFilters + " '1' LIKE '1'");
 		System.out.println("Select PropertyId From HomeIn.Property WHERE " + whereFilters + " '1' LIKE '1'");
+		if(resultsRs.isBeforeFirst()) {
+			Main.writeToLogFile("Loaging register page");
+			root = FXMLLoader.load(getClass().getResource("PropertyScreen.fxml"));
+			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		}
+		
+		/*
 		if(resultsRs.wasNull()) {
 			incorrectFilter.setText("No s'han trobat resultats");
 			Main.writeToLogFile("Login Failed: Property Not found");
@@ -481,8 +490,9 @@ public class Contoller {
 				stage.setScene(scene);
 				//Show stage
 				stage.show();
+		 */
 	}
-	
+
 
 	public static boolean hasElevator() {
 		return elevator;
