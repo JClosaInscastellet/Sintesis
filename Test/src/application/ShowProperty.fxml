@@ -2,30 +2,38 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
 <BorderPane id="mainBPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PropertyViewController">
    <top>
       <AnchorPane prefHeight="111.0" prefWidth="1280.0" style="-fx-background-color: #3CB371;" BorderPane.alignment="CENTER">
          <children>
             <Button id="btn" layoutX="43.0" layoutY="25.0" mnemonicParsing="false" onAction="#pullBack" stylesheets="@css/homeBtn.css" text="HomeIn " />
-            <Button id="favBtn" layoutX="1145.0" layoutY="31.0" mnemonicParsing="false" stylesheets="@css/homeBtn.css" />
-            <Button id="arrowBtn" layoutX="1056.0" layoutY="32.0" mnemonicParsing="false" onAction="#pullBack" rotate="-90.0" stylesheets="@css/homeBtn.css" />
          </children>
       </AnchorPane>
    </top>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label id="room" layoutX="410.0" layoutY="225.0" stylesheets="@css/mainPageResults.css" text="Habitacions: " />
-            <Label id="bathroom" layoutX="668.0" layoutY="225.0" stylesheets="@css/mainPageResults.css" text="Banys: " />
-            <Label id="surface" layoutX="408.0" layoutY="276.0" stylesheets="@css/mainPageResults.css" text="Superficie: " />
-            <Label id="city" layoutX="408.0" layoutY="170.0" stylesheets="@css/mainPageResults.css" text="Ciutat: " />
-            <Label id="zone" layoutX="668.0" layoutY="170.0" stylesheets="@css/mainPageResults.css" text="Zona: " />
-            <Label id="parking" layoutX="668.0" layoutY="276.0" stylesheets="@css/mainPageResults.css" text="Parquing: " />
-            <Label id="elevator" layoutX="408.0" layoutY="330.0" stylesheets="@css/mainPageResults.css" text="Ascensor: " />
-         </children>
-      </AnchorPane>
+      <ScrollPane prefHeight="292.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="images" prefHeight="240.0" prefWidth="1279.0">
+               <children>
+                  <AnchorPane prefHeight="275.0" prefWidth="1280.0">
+                     <children>
+                        <Label id="room" fx:id="room" layoutX="316.0" layoutY="103.0" stylesheets="@css/mainPageResults.css" text="Habitacions: " />
+                        <Label id="bathroom" fx:id="bathroom" layoutX="714.0" layoutY="103.0" stylesheets="@css/mainPageResults.css" text="Banys: " />
+                        <Label id="surface" fx:id="surface" layoutX="314.0" layoutY="154.0" stylesheets="@css/mainPageResults.css" text="Superficie: " />
+                        <Label id="city" fx:id="city" layoutX="314.0" layoutY="48.0" stylesheets="@css/mainPageResults.css" text="Ciutat: " />
+                        <Label id="zone" fx:id="zone" layoutX="714.0" layoutY="48.0" stylesheets="@css/mainPageResults.css" text="Zona: " />
+                        <Label id="parking" fx:id="parking" layoutX="714.0" layoutY="154.0" stylesheets="@css/mainPageResults.css" text="Parquing: " />
+                        <Label id="elevator" fx:id="elevator" layoutX="314.0" layoutY="208.0" stylesheets="@css/mainPageResults.css" text="Ascensor: " />
+                        <Label id="parking" fx:id="price" layoutX="714.0" layoutY="208.0" stylesheets="@css/mainPageResults.css" text="Preu: " />
+                     </children>
+                  </AnchorPane>
+               </children></VBox>
+         </content>
+      </ScrollPane>
    </center>
 </BorderPane>
